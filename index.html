@@ -175,6 +175,7 @@ footer a{color:var(--ink-soft)}
 <section>
   <h2>Логика на завтра</h2>
   <p><b>Главное — Codex CLI.</b> Подписка ChatGPT Business, которая у вас уже оплачена, открывает Codex CLI без дополнительных ключей и API-кредитов. Логин в одно нажатие через браузер.</p>
+  <p><b>Удобство — Handy.</b> Бесплатная open-source утилита для голосового ввода. Зажал клавишу — продиктовал — отпустил, текст вставляется в то поле, где курсор (в том числе в Codex). Распознаёт локально, аудио не уходит в облако — это уместно с учётом ваших NDA. Ставится за пару минут на Mac и Windows.</p>
   <p><b>Claude Code — опционально.</b> Регистрация в Claude.ai через российский номер не идёт. Один из путей — eSIM Казахстана/Сербии. Это второстепенная задача: если у Рода до утра получится завести Anthropic — поставим Claude Code сверху. Если нет — занятие пройдёт целиком на Codex.</p>
   <div class="callout callout-ok">
     <b>Минимум к утру:</b> у Рода и у Дмитрия в терминале запускается команда <code>codex</code> и открывает интерфейс. Всё остальное — бонус.
@@ -294,6 +295,20 @@ npm -v</code></pre>
 </section>
 
 <section>
+  <h3><span class="step">Шаг 6</span>Handy — голосовой ввод в терминал</h3>
+  <p>Маленькая бесплатная утилита, которая превращает Mac в надиктовщика: зажал горячую клавишу — говоришь — отпустил, текст автоматически вставляется в то поле, где курсор. В том числе в окно Codex.</p>
+  <p>Зачем для нашей задачи: разбор лота тендера, постановка задачи Codex, формулировка вопроса по ПУЭ — всё это намного быстрее наговорить голосом, чем набирать. Распознавание происходит локально на вашем маке, ничего не уходит в облако, что важно с учётом ваших NDA.</p>
+  <p>Скачать .dmg под ваш мак с <a href="https://handy.computer/download" target="_blank">handy.computer/download</a>:</p>
+  <ul>
+    <li><b>Apple Silicon</b> (M1/M2/M3/M4 — почти все маки с 2020 года) → <a href="https://github.com/cjpais/Handy/releases/download/v0.8.3/Handy_0.8.3_aarch64.dmg" target="_blank">Handy_0.8.3_aarch64.dmg</a></li>
+    <li><b>Intel</b> (старые маки до 2020) → <a href="https://github.com/cjpais/Handy/releases/download/v0.8.3/Handy_0.8.3_x64.dmg" target="_blank">Handy_0.8.3_x64.dmg</a></li>
+  </ul>
+  <p>Узнать какой у вас процессор: <b>яблоко в углу → About This Mac</b>. Если в строке Chip написано Apple M1/M2/M3/M4 — берёте Apple Silicon. Если Intel — Intel.</p>
+  <p>Установка стандартная: открыть .dmg, перетащить иконку Handy в папку Applications. При первом запуске macOS попросит разрешить доступ к микрофону и accessibility (нужно чтобы вставлять текст в чужие приложения) — System Settings → Privacy &amp; Security разрешить.</p>
+  <p>Горячая клавиша по умолчанию настраивается при первом запуске. Возьмите что-то редкое — например <code>F5</code> или <code>Right Option</code>. Дальше: зажали → продиктовали запрос → отпустили → текст вылезет в Codex.</p>
+</section>
+
+<section>
   <h3><span class="step">Опционально</span>Claude Code</h3>
   <p>Делать только если уже разобрались с регистрацией Anthropic (eSIM Казахстана/Сербии). Если регистрация в Claude.ai не пройдена — пропускайте, утром достаточно одного Codex.</p>
   <pre><button class="copy">copy</button><code>npm install -g @anthropic-ai/claude-code</code></pre>
@@ -315,6 +330,7 @@ npm -v</code></pre>
     <li><b>Codex CLI установлен</b><span><code>codex --version</code> выводит версию</span></li>
     <li><b>Залогинен в ChatGPT Business</b><span>команда <code>codex</code> открывает интерфейс агента</span></li>
     <li><b>Тестовый python создан</b><span>файл с «сила тока» и датой лежит в папке</span></li>
+    <li><b>Handy установлен</b><span>горячая клавиша диктует текст в Codex</span></li>
     <li><b>(Бонус) Claude Code</b><span>только если есть валидный Anthropic-аккаунт</span></li>
   </ul>
 </section>
@@ -385,6 +401,20 @@ npm -v</code></pre>
 </section>
 
 <section>
+  <h3><span class="step">Шаг 6</span>Handy — голосовой ввод в терминал</h3>
+  <p>Маленькая бесплатная утилита, которая превращает Windows в надиктовщика: зажал горячую клавишу — говоришь — отпустил, текст автоматически вставляется в то поле, где курсор. В том числе в окно Codex (PowerShell).</p>
+  <p>Зачем для нашей задачи: разбор лота тендера, постановка задачи Codex, формулировка отклика по HH — намного быстрее наговорить голосом, чем набирать. Распознавание происходит локально на вашем компьютере, ничего не уходит в облако, что важно с учётом NDA с заказчиками.</p>
+  <p>Скачать установщик с <a href="https://handy.computer/download" target="_blank">handy.computer/download</a>:</p>
+  <ul>
+    <li><b>Обычный ПК или ноутбук с Intel/AMD</b> (99% случаев) → <a href="https://github.com/cjpais/Handy/releases/download/v0.8.3/Handy_0.8.3_x64-setup.exe" target="_blank">Handy_0.8.3_x64-setup.exe</a></li>
+    <li><b>Windows on ARM</b> (если у вас Surface Pro X или похожий ARM-ноутбук) → <a href="https://github.com/cjpais/Handy/releases/download/v0.8.3/Handy_0.8.3_arm64-setup.exe" target="_blank">Handy_0.8.3_arm64-setup.exe</a></li>
+  </ul>
+  <p>Узнать какой процессор: <b>правой кнопкой по «Этот компьютер» → Свойства</b>. Если процессор Intel или AMD — берёте x64. Если Snapdragon/ARM — arm64.</p>
+  <p>Установка стандартная: запустить .exe, нажать Next → Install → Finish. Windows может предупредить «не известный издатель» — More info → Run anyway. При первом запуске разрешить доступ к микрофону.</p>
+  <p>Горячая клавиша настраивается при первом запуске — возьмите что-то редкое, например <code>F5</code> или <code>Right Ctrl</code>. Дальше: зажали → продиктовали запрос → отпустили → текст вылезет в PowerShell.</p>
+</section>
+
+<section>
   <h3><span class="step">Опционально</span>Claude Code</h3>
   <p>Делать только если получится зарегистрировать аккаунт в Claude.ai. На винде Claude Code работает нативно через ту же PowerShell — WSL2 не нужен.</p>
   <pre><button class="copy">copy</button><code>npm install -g @anthropic-ai/claude-code</code></pre>
@@ -412,6 +442,7 @@ npm -v</code></pre>
     <li><b>Codex CLI установлен</b><span><code>codex --version</code> выводит версию</span></li>
     <li><b>Залогинен в ChatGPT Business</b><span>команда <code>codex</code> открывает интерфейс агента</span></li>
     <li><b>Тестовый python создан</b><span>файл с «сила тока» и датой лежит в папке</span></li>
+    <li><b>Handy установлен</b><span>горячая клавиша диктует текст в Codex</span></li>
     <li><b>(Бонус) Claude Code</b><span>только если есть валидный Anthropic-аккаунт</span></li>
   </ul>
 </section>

@@ -8,55 +8,112 @@
 <link rel="canonical" href="https://timzinin.com/sila-toka-setup/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="_portal.css">
 <style>
-.hero{padding:clamp(60px,9vw,130px) 0 clamp(40px,6vw,90px);position:relative}
-.hero h1{font-size:clamp(54px,9vw,128px);max-width:14ch;margin-bottom:22px}
-.hero h1 em{font-style:italic;color:var(--bordeaux)}
-.hero .lede{font-size:clamp(18px,1.8vw,23px);max-width:60ch;color:var(--ink-soft);margin:0 0 30px}
-.hero .meta{display:flex;flex-wrap:wrap;gap:18px 36px;font-family:'JetBrains Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.08em}
-.hero .meta b{color:var(--bordeaux);display:block;font-size:11px;font-weight:600;letter-spacing:0.12em;margin-bottom:3px}
-.hero-geom{position:absolute;right:clamp(16px,4vw,60px);top:clamp(70px,10vw,130px);width:clamp(160px,22vw,300px);pointer-events:none;opacity:0.55;z-index:-1}
+/* === HERO — poster-style === */
+.hero{position:relative;padding:clamp(40px,6vw,90px) 0 clamp(40px,5vw,80px);overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:clamp(20px,3vw,36px)}
+.hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:var(--c-library);font-weight:700;display:flex;align-items:center;gap:14px;margin-bottom:8px}
+.hero-eyebrow::before{content:"";width:42px;height:2px;background:var(--c-library)}
+.hero-title{font-family:'DM Serif Display',serif;font-size:clamp(82px,15vw,238px);line-height:0.86;letter-spacing:-0.05em;margin:0;color:var(--ink);position:relative;z-index:2}
+.hero-title em{font-style:italic;color:var(--c-library);position:relative;display:inline-block}
+.hero-title em::after{content:"";position:absolute;left:-2%;right:-2%;bottom:0.05em;height:0.2em;background:var(--c-contact);z-index:-1;opacity:0.7;transform:rotate(-1deg)}
+.hero-meta-row{display:grid;grid-template-columns:1.5fr 1fr;gap:clamp(20px,4vw,60px);margin-top:clamp(30px,4vw,50px);align-items:end}
+@media(max-width:780px){.hero-meta-row{grid-template-columns:1fr;gap:24px}}
+.hero-lede{font-size:clamp(18px,1.7vw,22px);line-height:1.45;color:var(--ink);max-width:46ch;margin:0;font-weight:500}
+.hero-lede b{font-weight:700}
+.hero-stats{display:flex;flex-direction:column;gap:18px;font-family:'JetBrains Mono',monospace;font-size:12.5px;text-transform:uppercase;letter-spacing:0.1em;border-left:3px solid var(--c-library);padding-left:20px}
+.hero-stats .row{display:flex;flex-direction:column;gap:3px}
+.hero-stats b{color:var(--c-library);font-size:10.5px;font-weight:700;letter-spacing:0.18em}
+.hero-stats .v{font-family:'DM Serif Display',serif;font-size:22px;letter-spacing:-0.02em;color:var(--ink);text-transform:none;font-weight:400}
 
-section{padding:clamp(50px,7vw,100px) 0;border-bottom:1.5px solid var(--line)}
-h2.sec-title{font-size:clamp(36px,6vw,72px);margin-bottom:14px;max-width:22ch}
-h2.sec-title em{color:var(--bordeaux);font-style:italic}
-.sec-lede{font-size:clamp(16px,1.4vw,18px);max-width:60ch;color:var(--ink-soft);margin:0 0 36px}
+.hero-deco{position:absolute;right:-2%;top:8%;width:clamp(180px,22vw,360px);pointer-events:none;z-index:1;opacity:0.95}
 
-.module-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:0;border-top:2.5px solid var(--line);border-left:2.5px solid var(--line);box-shadow:8px 8px 0 var(--line);background:var(--cream)}
-.module{display:flex;flex-direction:column;gap:14px;padding:32px clamp(22px,3vw,32px);border-right:2.5px solid var(--line);border-bottom:2.5px solid var(--line);background:var(--cream);min-height:280px;text-decoration:none;color:var(--ink);position:relative;transition:background .15s,transform .15s}
-.module:hover{background:var(--peach)}
-.module .num{font-family:'DM Serif Display',serif;font-size:62px;line-height:0.9;color:var(--bordeaux);opacity:0.85}
-.module .tag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--bordeaux);font-weight:600}
-.module h3{font-family:'DM Serif Display',serif;font-size:clamp(26px,2.4vw,34px);margin:0;color:var(--ink);letter-spacing:-0.015em}
-.module h3 em{font-style:italic;color:var(--bordeaux)}
-.module .desc{font-size:15px;line-height:1.45;color:var(--ink-soft);margin:0 0 auto;max-width:32ch}
-.module .arrow{margin-top:auto;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--bordeaux);display:flex;align-items:center;gap:8px}
-.module .arrow::after{content:"→";font-size:18px;transition:transform .15s}
-.module:hover .arrow::after{transform:translateX(6px)}
-.module.featured{background:var(--bordeaux);color:var(--cream)}
-.module.featured h3,.module.featured h3 em{color:var(--cream)}
-.module.featured .num{color:var(--ochre);opacity:0.95}
-.module.featured .tag{color:var(--ochre)}
-.module.featured .desc{color:oklch(88% 0.04 85)}
-.module.featured .arrow{color:var(--ochre)}
-.module.featured:hover{background:oklch(38% 0.15 25)}
+/* MARQUEE — themes ribbon */
+.marquee{margin:0;border-top:2px solid var(--line);border-bottom:2px solid var(--line);background:var(--c-library);overflow:hidden;position:relative}
+.marquee-track{display:flex;animation:marquee 50s linear infinite;white-space:nowrap;padding:18px 0;align-items:center;gap:0}
+.marquee-track span{font-family:'DM Serif Display',serif;font-size:clamp(28px,4vw,52px);color:var(--c-cream);padding:0 30px;letter-spacing:-0.02em;flex-shrink:0}
+.marquee-track .dot{display:inline-block;width:10px;height:10px;background:var(--c-contact);border-radius:50%;flex-shrink:0;padding:0;margin:0 4px}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-.about{display:grid;grid-template-columns:1fr 1.4fr;gap:clamp(40px,6vw,90px);align-items:start}
-@media(max-width:780px){.about{grid-template-columns:1fr;gap:30px}}
-.about .label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--bordeaux);font-weight:600}
-.about p{font-size:17px;line-height:1.6;color:var(--ink);margin:0 0 16px}
-.about p b{color:var(--ink)}
+/* === MODULES — Dropbox-style color system === */
+.modules{padding:clamp(60px,8vw,120px) 0;border-bottom:2px solid var(--line)}
+.section-head{display:grid;grid-template-columns:1fr 1.4fr;gap:clamp(30px,5vw,80px);align-items:end;margin-bottom:clamp(40px,5vw,70px)}
+@media(max-width:780px){.section-head{grid-template-columns:1fr;gap:18px}}
+.section-head h2{font-family:'DM Serif Display',serif;font-size:clamp(54px,8vw,124px);line-height:0.92;letter-spacing:-0.045em;margin:0;max-width:14ch}
+.section-head h2 em{font-style:italic;color:var(--c-library)}
+.section-head .description{font-size:17px;line-height:1.55;color:var(--ink-soft);max-width:46ch;margin:0;padding-bottom:10px}
 
-.contact-block{background:var(--cream);border:2.5px solid var(--line);box-shadow:6px 6px 0 var(--line);padding:34px clamp(24px,4vw,40px);display:grid;grid-template-columns:auto 1fr;gap:26px;align-items:center;margin-top:20px}
-@media(max-width:680px){.contact-block{grid-template-columns:1fr;gap:14px}}
-.contact-block .avatar{width:90px;height:90px;border-radius:50%;background:var(--ochre);border:3px solid var(--line);display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:42px;color:var(--ink);line-height:1}
-.contact-block h3{font-family:'DM Serif Display',serif;font-size:32px;margin:0 0 4px;letter-spacing:-0.01em}
-.contact-block .role{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:14px}
-.contact-block .channels{display:flex;flex-wrap:wrap;gap:8px}
-.contact-block .channels a{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.04em;font-weight:600;text-transform:uppercase;padding:8px 14px;border:1.5px solid var(--bordeaux);color:var(--bordeaux);text-decoration:none;background:var(--bg);transition:background .15s,color .15s}
-.contact-block .channels a:hover{background:var(--bordeaux);color:var(--cream)}
+.module-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:0;border:2.5px solid var(--line);background:var(--paper)}
+@media(max-width:980px){.module-grid{grid-template-columns:1fr}}
+
+.module{display:flex;flex-direction:column;justify-content:space-between;gap:clamp(20px,3vw,40px);padding:clamp(28px,3.5vw,46px) clamp(26px,3vw,40px);text-decoration:none;color:var(--ink);position:relative;transition:transform .25s cubic-bezier(0.2,0.8,0.2,1),background .2s;min-height:clamp(360px,38vw,460px);overflow:hidden}
+.module-1{grid-column:span 7;background:var(--c-library);color:var(--c-cream);border-right:2.5px solid var(--line)}
+.module-2{grid-column:span 5;background:var(--c-setup);color:var(--c-cream);border-bottom:2.5px solid var(--line)}
+.module-3{grid-column:span 5;grid-row:2;background:var(--c-contact);color:var(--ink)}
+.module-1:hover{background:oklch(38% 0.15 25)}
+.module-2:hover{background:oklch(54% 0.17 45)}
+.module-3:hover{background:oklch(78% 0.14 75)}
+@media(max-width:980px){.module-1,.module-2,.module-3{grid-column:1;border:none;border-bottom:2.5px solid var(--line)}.module-3{border-bottom:none}}
+
+.module .top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.module .num{font-family:'DM Serif Display',serif;font-size:clamp(70px,9vw,138px);line-height:0.85;letter-spacing:-0.05em;opacity:0.9}
+.module-1 .num{color:var(--c-contact)}
+.module-2 .num{color:var(--c-cream);opacity:0.55}
+.module-3 .num{color:var(--c-library)}
+.module .tag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:700;display:inline-flex;align-items:center;gap:8px;padding:6px 11px;border:1.5px solid currentColor;align-self:flex-start;line-height:1;flex-shrink:0;margin-top:14px}
+.module h3{font-family:'DM Serif Display',serif;font-size:clamp(38px,5vw,72px);line-height:0.92;letter-spacing:-0.04em;margin:0;max-width:13ch}
+.module h3 em{font-style:italic}
+.module-1 h3 em{color:var(--c-contact)}
+.module-2 h3 em{color:var(--c-contact)}
+.module-3 h3 em{color:var(--c-library)}
+.module .desc{font-size:16px;line-height:1.5;margin:0;max-width:34ch;opacity:0.9}
+.module .arrow{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;display:inline-flex;align-items:center;gap:14px;align-self:flex-start;padding:14px 0 0;border-top:2px solid currentColor;width:auto}
+.module .arrow::after{content:"→";font-size:22px;line-height:1;transition:transform .2s}
+.module:hover .arrow::after{transform:translateX(8px)}
+
+.module-deco{position:absolute;pointer-events:none;opacity:0.18}
+.module-1 .module-deco{right:-30px;bottom:-30px;width:240px;height:240px;border:3px solid var(--c-contact);border-radius:50%}
+.module-2 .module-deco{right:-50px;top:-50px;width:200px;height:200px;background:var(--c-cream);border-radius:50%;opacity:0.18}
+.module-3 .module-deco{left:-40px;bottom:-40px;width:180px;height:180px;background:var(--c-library);border-radius:50%;opacity:0.15}
+
+/* === ABOUT === */
+.about-section{padding:clamp(70px,9vw,140px) 0;border-bottom:2px solid var(--line);position:relative}
+.about-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:clamp(40px,7vw,120px);align-items:start}
+@media(max-width:780px){.about-grid{grid-template-columns:1fr;gap:30px}}
+.about-grid .label-side{display:flex;flex-direction:column;gap:14px;position:sticky;top:90px}
+.about-grid .label-side .pill{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--c-library);font-weight:700;padding:6px 12px;border:1.5px solid var(--c-library);align-self:flex-start}
+.about-grid .label-side h2{font-family:'DM Serif Display',serif;font-size:clamp(46px,7vw,96px);line-height:0.92;letter-spacing:-0.045em;margin:8px 0 0}
+.about-grid .label-side h2 em{font-style:italic;color:var(--c-library)}
+.about-grid .text p{font-size:clamp(18px,1.5vw,21px);line-height:1.55;color:var(--ink);margin:0 0 18px;max-width:54ch}
+.about-grid .text p:first-child{font-family:'DM Serif Display',serif;font-size:clamp(24px,2.4vw,32px);line-height:1.25;letter-spacing:-0.02em;color:var(--ink);margin-bottom:24px}
+.about-grid .text p b{font-weight:700;color:var(--c-library)}
+
+.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:50px;border-top:2px solid var(--line);border-left:2px solid var(--line)}
+@media(max-width:680px){.about-stats{grid-template-columns:1fr}}
+.about-stat{padding:24px 22px;border-right:2px solid var(--line);border-bottom:2px solid var(--line);background:var(--paper)}
+.about-stat .v{font-family:'DM Serif Display',serif;font-size:clamp(38px,4vw,52px);line-height:1;letter-spacing:-0.03em;color:var(--c-library);margin-bottom:8px}
+.about-stat .l{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-soft);font-weight:600}
+
+/* === CONTACT BLOCK === */
+.contact-section{padding:clamp(70px,9vw,140px) 0}
+.contact-card{background:var(--ink);color:var(--c-cream);padding:clamp(40px,6vw,80px);position:relative;overflow:hidden;display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(30px,5vw,80px);align-items:center}
+@media(max-width:780px){.contact-card{grid-template-columns:1fr;gap:30px}}
+.contact-card::before{content:"";position:absolute;top:-50px;right:-50px;width:300px;height:300px;border-radius:50%;background:var(--c-library);opacity:0.7;mix-blend-mode:multiply}
+.contact-card::after{content:"";position:absolute;bottom:-40px;left:30%;width:180px;height:180px;background:var(--c-contact);border-radius:50%;opacity:0.55;mix-blend-mode:screen}
+.contact-card>*{position:relative;z-index:2}
+.contact-card h2{font-family:'DM Serif Display',serif;font-size:clamp(46px,7vw,96px);line-height:0.92;letter-spacing:-0.045em;color:var(--c-cream);margin:0 0 18px}
+.contact-card h2 em{font-style:italic;color:var(--c-contact)}
+.contact-card .subtitle{font-size:17px;line-height:1.5;color:oklch(82% 0.03 85);max-width:42ch;margin:0}
+.contact-info{display:flex;flex-direction:column;gap:18px}
+.contact-info .person{display:flex;align-items:center;gap:20px}
+.contact-info .avatar{width:84px;height:84px;border-radius:50%;background:var(--c-contact);border:3px solid var(--c-cream);display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:38px;color:var(--ink);line-height:1;flex-shrink:0}
+.contact-info .person h3{font-family:'DM Serif Display',serif;font-size:clamp(28px,3vw,38px);color:var(--c-cream);letter-spacing:-0.02em;margin:0 0 4px}
+.contact-info .person .role{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;color:oklch(75% 0.04 85)}
+.contact-info .channels{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.contact-info .channels a{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.06em;font-weight:700;text-transform:uppercase;padding:11px 18px;background:var(--c-contact);color:var(--ink);text-decoration:none;transition:background .15s;border:none}
+.contact-info .channels a:hover{background:var(--c-cream)}
 </style>
 </head>
 <body>
@@ -69,7 +126,7 @@ h2.sec-title em{color:var(--bordeaux);font-style:italic}
     </a>
     <div class="portal-links">
       <a href="./" class="active">Главная</a>
-      <a href="./library/">Библиотека встреч</a>
+      <a href="./library/">Библиотека</a>
       <a href="./setup/">Установка</a>
       <a href="https://t.me/timzinin" target="_blank">Контакт</a>
     </div>
@@ -79,80 +136,137 @@ h2.sec-title em{color:var(--bordeaux);font-style:italic}
 <div class="wrap">
 
 <section class="hero">
-  <svg class="hero-geom" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <circle cx="100" cy="100" r="92" stroke="oklch(42% 0.15 25)" stroke-width="2.5"/>
-    <circle cx="100" cy="100" r="60" fill="none" stroke="oklch(72% 0.14 75)" stroke-width="2"/>
-    <path d="M30 100 L170 100 M100 30 L100 170" stroke="oklch(42% 0.15 25)" stroke-width="2"/>
-    <circle cx="100" cy="100" r="8" fill="oklch(42% 0.15 25)"/>
+  <svg class="hero-deco" viewBox="0 0 360 360" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="180" cy="180" r="170" stroke="oklch(42% 0.15 25)" stroke-width="2.5"/>
+    <circle cx="180" cy="180" r="120" stroke="oklch(72% 0.14 75)" stroke-width="2"/>
+    <circle cx="180" cy="180" r="70" stroke="oklch(58% 0.17 45)" stroke-width="2"/>
+    <circle cx="180" cy="180" r="22" fill="oklch(42% 0.15 25)"/>
+    <line x1="180" y1="10" x2="180" y2="350" stroke="oklch(42% 0.15 25)" stroke-width="1.5" stroke-dasharray="6 4"/>
+    <line x1="10" y1="180" x2="350" y2="180" stroke="oklch(42% 0.15 25)" stroke-width="1.5" stroke-dasharray="6 4"/>
+    <text x="180" y="44" font-family="JetBrains Mono" font-size="11" fill="oklch(42% 0.15 25)" text-anchor="middle" font-weight="700" letter-spacing="2">N</text>
+    <text x="334" y="184" font-family="JetBrains Mono" font-size="11" fill="oklch(42% 0.15 25)" text-anchor="middle" font-weight="700" letter-spacing="2">E</text>
   </svg>
-  <span class="eyebrow">для Рода и Дмитрия · v1.0</span>
-  <h1>Академия <em>Силы Тока</em></h1>
-  <p class="lede">Персональный образовательный портал. Здесь живут материалы наших занятий, инструкции по настройке инструментов и записи встреч. Возвращайтесь сюда между занятиями — чтобы повторить, посмотреть запись или скопировать команду.</p>
-  <div class="meta">
-    <div><b>Старт</b> 30 апреля 2026</div>
-    <div><b>Участники</b> Род Шайхутдинов · Дмитрий Харламов</div>
-    <div><b>Куратор</b> Тимофей Зинин</div>
+  <div class="hero-grid">
+    <div class="hero-eyebrow">v1.0 · персональный портал</div>
+    <h1 class="hero-title">Академия<br>— <em>Силы&nbsp;Тока</em></h1>
+    <div class="hero-meta-row">
+      <p class="hero-lede">Учебный портал для <b>Рода и Дмитрия</b>. Здесь живут материалы наших занятий, инструкции по установке инструментов и записи встреч. Возвращайтесь между занятиями — повторить, пересмотреть запись, скопировать команду.</p>
+      <div class="hero-stats">
+        <div class="row"><b>старт</b><span class="v">30 апреля 2026</span></div>
+        <div class="row"><b>встреч</b><span class="v">1 — далее по плану</span></div>
+        <div class="row"><b>куратор</b><span class="v">Тимофей Зинин</span></div>
+      </div>
+    </div>
   </div>
 </section>
 
-<section>
-  <span class="eyebrow">разделы</span>
-  <h2 class="sec-title">С чего <em>начать</em></h2>
-  <p class="sec-lede">Три точки входа. Если впервые на портале — начните с «Установки». Если уже на занятии — открывайте «Библиотеку» с записями.</p>
+</div>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Codex CLI</span><span class="dot"></span>
+    <span>Скиллы</span><span class="dot"></span>
+    <span>Агенты</span><span class="dot"></span>
+    <span>MCP</span><span class="dot"></span>
+    <span>Голосовой ввод</span><span class="dot"></span>
+    <span>GitHub Pages</span><span class="dot"></span>
+    <span>End-to-end</span><span class="dot"></span>
+    <span>Codex CLI</span><span class="dot"></span>
+    <span>Скиллы</span><span class="dot"></span>
+    <span>Агенты</span><span class="dot"></span>
+    <span>MCP</span><span class="dot"></span>
+    <span>Голосовой ввод</span><span class="dot"></span>
+    <span>GitHub Pages</span><span class="dot"></span>
+    <span>End-to-end</span><span class="dot"></span>
+  </div>
+</div>
+
+<div class="wrap">
+
+<section class="modules">
+  <div class="section-head">
+    <h2>Куда <em>идти</em></h2>
+    <p class="description">Три точки входа. Если впервые на портале — начните с «Установки». Если уже на занятии — открывайте «Библиотеку» и смотрите запись.</p>
+  </div>
 
   <div class="module-grid">
 
-    <a class="module featured" href="./library/">
-      <div class="num">01</div>
-      <div class="tag">главное · обновляется</div>
-      <h3>Библиотека <em>встреч</em></h3>
-      <p class="desc">Записи всех занятий с тайм-кодами, конспектами и ссылками на материалы. Первая встреча уже внутри.</p>
-      <div class="arrow">Открыть</div>
+    <a class="module module-1" href="./library/">
+      <div class="module-deco"></div>
+      <div class="top">
+        <span class="num">01</span>
+        <span class="tag">главное · обновляется</span>
+      </div>
+      <div>
+        <h3>Библиотека <em>встреч</em></h3>
+        <p class="desc">Записи всех занятий с тайм-кодами, конспектами и ссылками на материалы. Первая встреча уже внутри.</p>
+      </div>
+      <span class="arrow">Открыть библиотеку</span>
     </a>
 
-    <a class="module" href="./setup/">
-      <div class="num">02</div>
-      <div class="tag">базовая настройка</div>
-      <h3>Установка <em>Codex</em></h3>
-      <p class="desc">Пошаговая инструкция для Mac и Windows: Node, Codex CLI, голосовой ввод Handy, опционально Claude Code.</p>
-      <div class="arrow">Перейти</div>
+    <a class="module module-2" href="./setup/">
+      <div class="module-deco"></div>
+      <div class="top">
+        <span class="num">02</span>
+        <span class="tag">базовая настройка</span>
+      </div>
+      <div>
+        <h3>Установка <em>Codex</em></h3>
+        <p class="desc">Пошаговая инструкция: Mac и Windows. Node, Codex CLI, голосовой ввод Handy, опционально Claude Code.</p>
+      </div>
+      <span class="arrow">К инструкции</span>
     </a>
 
-    <a class="module" href="https://t.me/timzinin" target="_blank">
-      <div class="num">03</div>
-      <div class="tag">прямой контакт</div>
-      <h3>Связь <em>с Тимофеем</em></h3>
-      <p class="desc">Любой вопрос — Telegram. Скриншот ошибки, идея, что добавить в портал — пишите без формальностей.</p>
-      <div class="arrow">@timzinin</div>
+    <a class="module module-3" href="https://t.me/timzinin" target="_blank">
+      <div class="module-deco"></div>
+      <div class="top">
+        <span class="num">03</span>
+        <span class="tag">прямой контакт</span>
+      </div>
+      <div>
+        <h3>Связь <em>с куратором</em></h3>
+        <p class="desc">Любой вопрос — Telegram. Скриншот ошибки, идея, что добавить в портал — пишите без формальностей.</p>
+      </div>
+      <span class="arrow">@timzinin</span>
     </a>
 
   </div>
 </section>
 
-<section>
-  <div class="about">
-    <div>
-      <div class="label">для кого</div>
-      <h2 class="sec-title" style="font-size:clamp(28px,4vw,44px);margin-top:6px">Что мы здесь <em>делаем</em></h2>
+<section class="about-section">
+  <div class="about-grid">
+    <div class="label-side">
+      <span class="pill">для кого</span>
+      <h2>Что мы здесь <em>делаем</em></h2>
     </div>
-    <div>
-      <p>«Сила Тока» — подрядное проектное бюро. На занятиях мы шаг за шагом разбираемся, как устроены современные AI-агенты, скиллы и MCP, и как ими пользоваться руками — без посредников, в собственном терминале, на собственных задачах.</p>
-      <p>Цель — чтобы Род и Дмитрий <b>сами</b> могли формулировать задачу одной строкой и получать готовый артефакт: страницу, скрипт, обзор, отчёт. Без курсов «введение в нейросети» — сразу руками.</p>
+    <div class="text">
+      <p>«Сила Тока» — подрядное проектное бюро. На занятиях шаг за шагом разбираемся, как устроены AI-агенты, скиллы и MCP — и как ими пользоваться руками, в собственном терминале, на собственных задачах.</p>
+      <p>Цель — чтобы Род и Дмитрий <b>сами</b> формулировали задачу одной строкой и получали готовый артефакт: страницу, скрипт, обзор, отчёт. Без курсов «введение в нейросети» — сразу руками.</p>
       <p>Все материалы остаются здесь. Ничего не теряется в чатах, ничего не нужно искать в почте. Один URL — вся история.</p>
+
+      <div class="about-stats">
+        <div class="about-stat"><div class="v">02</div><div class="l">участника</div></div>
+        <div class="about-stat"><div class="v">∞</div><div class="l">встреч в плане</div></div>
+        <div class="about-stat"><div class="v">1.5h</div><div class="l">средняя сессия</div></div>
+      </div>
     </div>
   </div>
 </section>
 
-<section>
-  <span class="eyebrow">всегда на связи</span>
-  <h2 class="sec-title">Если что-то <em>сломалось</em></h2>
-  <p class="sec-lede">Не сидите долго на непонятном экране. Скриншот в Telegram — самый быстрый способ разобраться.</p>
-
-  <div class="contact-block">
-    <div class="avatar">Т</div>
+<section class="contact-section">
+  <div class="contact-card">
     <div>
-      <h3>Тимофей Зинин</h3>
-      <div class="role">куратор · преподаватель · техподдержка</div>
+      <h2>Если что-то <em>сломалось</em></h2>
+      <p class="subtitle">Не сидите долго на непонятном экране. Скриншот в Telegram — самый быстрый способ разобраться. Не работает завтра — не работает и через неделю.</p>
+    </div>
+    <div class="contact-info">
+      <div class="person">
+        <div class="avatar">Т</div>
+        <div>
+          <h3>Тимофей Зинин</h3>
+          <div class="role">куратор · преподаватель · техподдержка</div>
+        </div>
+      </div>
       <div class="channels">
         <a href="https://t.me/timzinin" target="_blank">Telegram @timzinin</a>
         <a href="https://timzinin.com" target="_blank">timzinin.com</a>

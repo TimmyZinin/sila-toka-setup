@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Библиотека встреч · Сила Тока · Академия</title>
+<meta name="description" content="Записи и материалы всех занятий для Рода и Дмитрия. Запись каждой встречи на Zoom + конспект + ссылки.">
+<link rel="canonical" href="https://timzinin.com/sila-toka-setup/library/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../_portal.css">
+<style>
+.head{padding:clamp(50px,7vw,100px) 0 clamp(30px,4vw,60px)}
+.head h1{font-size:clamp(46px,8vw,108px);max-width:14ch;margin-bottom:18px}
+.head h1 em{font-style:italic;color:var(--bordeaux)}
+.head .lede{font-size:clamp(17px,1.5vw,21px);max-width:60ch;color:var(--ink-soft);margin:0}
+
+.lessons{display:flex;flex-direction:column;gap:0;border-top:2.5px solid var(--line);margin-bottom:60px}
+.lesson{display:grid;grid-template-columns:120px 1fr auto;gap:clamp(20px,3vw,40px);padding:28px clamp(16px,3vw,32px);border-bottom:2.5px solid var(--line);background:var(--cream);text-decoration:none;color:var(--ink);transition:background .15s,transform .1s;align-items:center}
+.lesson:hover{background:var(--peach)}
+@media(max-width:680px){.lesson{grid-template-columns:1fr;gap:10px;padding:22px}}
+.lesson .date{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:0.06em;color:var(--bordeaux);font-weight:600;text-transform:uppercase;line-height:1.3}
+.lesson .date b{display:block;font-family:'DM Serif Display',serif;font-size:38px;color:var(--ink);font-weight:400;letter-spacing:-0.02em;line-height:1}
+.lesson .info h2{font-family:'DM Serif Display',serif;font-size:clamp(24px,2.6vw,34px);margin:0 0 6px;line-height:1.1;letter-spacing:-0.01em}
+.lesson .info h2 em{font-style:italic;color:var(--bordeaux)}
+.lesson .info .desc{color:var(--ink-soft);font-size:15px;line-height:1.5;margin:0 0 8px;max-width:60ch}
+.lesson .info .tags{display:flex;flex-wrap:wrap;gap:6px}
+.lesson .info .tags span{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;background:var(--bg-2);padding:3px 8px;color:var(--ink-soft)}
+.lesson .arrow{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--bordeaux);display:flex;align-items:center;gap:8px;white-space:nowrap}
+.lesson .arrow::after{content:"→";font-size:18px;transition:transform .15s}
+.lesson:hover .arrow::after{transform:translateX(6px)}
+@media(max-width:680px){.lesson .arrow{justify-content:flex-start}}
+
+.upcoming{background:var(--bg-2);border:2px dashed var(--line);padding:30px clamp(20px,3vw,32px);text-align:center;color:var(--ink-soft);font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:0.06em;text-transform:uppercase}
+.upcoming b{color:var(--bordeaux);display:block;font-family:'DM Serif Display',serif;font-size:24px;text-transform:none;letter-spacing:-0.01em;margin-bottom:6px;font-weight:400}
+</style>
+</head>
+<body>
+
+<nav class="portal-nav">
+  <div class="portal-nav-inner">
+    <a class="portal-brand" href="../">
+      <span class="spark"></span>
+      <span class="name"><b>Сила Тока</b><span>академия · персональный портал</span></span>
+    </a>
+    <div class="portal-links">
+      <a href="../">Главная</a>
+      <a href="./" class="active">Библиотека встреч</a>
+      <a href="../setup/">Установка</a>
+      <a href="https://t.me/timzinin" target="_blank">Контакт</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<header class="head">
+  <span class="eyebrow">архив занятий · обновляется</span>
+  <h1>Библиотека <em>встреч</em></h1>
+  <p class="lede">Все наши занятия с записями на Zoom, конспектами и ссылками на материалы. Возвращайтесь сюда чтобы повторить, посмотреть запись или скопировать команду.</p>
+</header>
+
+<div class="lessons">
+
+  <a class="lesson" href="2026-04-30/">
+    <div class="date">апр<b>30</b>2026</div>
+    <div class="info">
+      <h2>Настройка <em>Codex</em> в CLI-версии</h2>
+      <p class="desc">Поставили Node, Codex, Handy. Разобрали скиллы, агенты, MCP. Прошли цепочку «запрос → готовая страница в интернете».</p>
+      <div class="tags">
+        <span>Codex CLI</span>
+        <span>Handy</span>
+        <span>Скиллы</span>
+        <span>MCP</span>
+        <span>GitHub Pages</span>
+      </div>
+    </div>
+    <div class="arrow">Открыть</div>
+  </a>
+
+</div>
+
+<div class="upcoming">
+  <b>Следующее занятие — скоро</b>
+  Запись и конспект появятся здесь сразу после встречи
+</div>
+
+</div>
+
+<footer class="portal-footer">
+  <div class="inner">
+    <span>Сила Тока · Академия · библиотека встреч</span>
+    <span><a href="../">← на главную</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

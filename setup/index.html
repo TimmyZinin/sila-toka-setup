@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сила Тока — инструкция к утру 30 апреля</title>
+<meta name="description" content="Установка CLI Codex (обязательно) и Claude Code (опционально) для Рода (Mac) и Дмитрия (Windows) к занятию 30 апреля.">
+<link rel="canonical" href="https://timzinin.com/sila-toka-setup/setup/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../_portal.css">
+<style>
+:root{
+  --bg: oklch(97% 0.020 85);
+  --bg-2: oklch(94% 0.030 80);
+  --ink: oklch(18% 0.02 40);
+  --ink-soft: oklch(35% 0.03 40);
+  --line: oklch(20% 0.02 40);
+  --bordeaux: oklch(42% 0.15 25);
+  --terracotta: oklch(58% 0.17 45);
+  --ochre: oklch(72% 0.14 75);
+  --peach: oklch(82% 0.09 75);
+  --cream: oklch(93% 0.04 85);
+  --code-bg: oklch(22% 0.02 40);
+  --code-ink: oklch(94% 0.04 85);
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Space Grotesk',system-ui,sans-serif;font-size:17px;line-height:1.55;position:relative;min-height:100vh}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1000;opacity:0.32;mix-blend-mode:multiply;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.07 0 0 0 0 0.05 0 0 0 0.32 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+
+h1,h2,h3,h4{font-family:'DM Serif Display',Georgia,serif;font-weight:400;letter-spacing:-0.02em;line-height:1.05;margin:0}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+a{color:var(--bordeaux);text-decoration:underline;text-underline-offset:3px}
+a:hover{color:var(--terracotta)}
+
+.wrap{max-width:1100px;margin:0 auto;padding:0 clamp(20px,5vw,60px)}
+
+header{padding:clamp(50px,9vw,110px) 0 clamp(30px,5vw,60px);border-bottom:1.5px solid var(--line)}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--bordeaux);margin-bottom:18px;display:inline-block;padding:5px 12px;border:1.5px solid var(--bordeaux)}
+h1{font-size:clamp(46px,8vw,108px);max-width:14ch;margin-bottom:24px}
+h1 em{font-style:italic;color:var(--bordeaux)}
+.lede{font-size:clamp(18px,1.7vw,22px);max-width:62ch;color:var(--ink-soft);margin:0}
+.meta{display:flex;flex-wrap:wrap;gap:18px 32px;margin-top:28px;font-family:'JetBrains Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink)}
+.meta b{color:var(--bordeaux);display:block;font-size:11px;font-weight:600;letter-spacing:0.12em;margin-bottom:3px}
+
+.tabs{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:2.5px solid var(--line);padding:18px clamp(20px,5vw,60px)}
+.wrap-tabs{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:2.5px solid var(--line);background:var(--cream);box-shadow:6px 6px 0 var(--line)}
+.tab-btn{appearance:none;background:var(--cream);border:none;border-right:2.5px solid var(--line);color:var(--ink);font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;letter-spacing:0.02em;padding:18px 18px;cursor:pointer;transition:background .15s,color .15s;display:flex;align-items:center;justify-content:center;gap:14px;text-align:left;min-height:78px;position:relative}
+.tab-btn:last-child{border-right:none}
+.tab-btn:hover{background:var(--peach)}
+.tab-btn.active{background:var(--bordeaux);color:var(--cream)}
+.tab-btn .num{display:inline-flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:34px;line-height:1;color:var(--bordeaux);background:var(--bg);width:50px;height:50px;border:2px solid var(--line);flex-shrink:0;transition:color .15s,background .15s,border-color .15s}
+.tab-btn:hover .num{background:var(--cream)}
+.tab-btn.active .num{color:var(--bordeaux);background:var(--ochre);border-color:var(--ochre)}
+.tab-btn .label{display:flex;flex-direction:column;gap:3px;line-height:1.15}
+.tab-btn .label .top{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;opacity:0.7;font-weight:600}
+.tab-btn .label .name{font-family:'DM Serif Display',serif;font-size:22px;letter-spacing:-0.01em;font-weight:400}
+.tab-btn.active .label .top{opacity:0.85;color:var(--ochre)}
+@media(max-width:680px){
+  .wrap-tabs{grid-template-columns:1fr;box-shadow:4px 4px 0 var(--line)}
+  .tab-btn{border-right:none;border-bottom:2.5px solid var(--line);min-height:64px;padding:14px 16px}
+  .tab-btn:last-child{border-bottom:none}
+  .tab-btn .num{width:42px;height:42px;font-size:26px}
+  .tab-btn .label .name{font-size:18px}
+}
+
+main{padding:clamp(40px,6vw,80px) 0 120px}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+section{margin-bottom:clamp(40px,5vw,70px)}
+h2{font-size:clamp(32px,4.5vw,56px);max-width:22ch;margin-bottom:18px}
+h2 em{color:var(--bordeaux);font-style:italic}
+h3{font-size:clamp(22px,2.2vw,30px);margin:36px 0 14px;color:var(--ink)}
+h3 .step{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--bordeaux);margin-right:14px;letter-spacing:0.06em}
+p{margin:0 0 14px;max-width:64ch}
+ul{padding-left:22px;margin:0 0 14px;max-width:64ch}
+li{margin-bottom:8px}
+.callout{background:var(--cream);border-left:4px solid var(--bordeaux);padding:18px 22px;margin:24px 0;font-size:16px}
+.callout b{color:var(--bordeaux)}
+.callout-warn{background:oklch(94% 0.05 30);border-left-color:var(--terracotta)}
+.callout-ok{background:oklch(94% 0.05 130);border-left-color:oklch(48% 0.15 140)}
+
+pre{background:var(--code-bg);color:var(--code-ink);font-family:'JetBrains Mono',monospace;font-size:14px;line-height:1.55;padding:16px 20px;border-radius:0;overflow-x:auto;margin:14px 0;border-left:4px solid var(--ochre);position:relative}
+code{font-family:'JetBrains Mono',monospace;font-size:0.92em;background:var(--bg-2);padding:1px 6px;border-radius:3px;color:var(--bordeaux)}
+pre code{background:transparent;color:inherit;padding:0;font-size:14px}
+.copy{position:absolute;top:8px;right:8px;background:var(--ochre);border:none;color:var(--ink);font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.1em;padding:4px 9px;cursor:pointer;text-transform:uppercase}
+.copy:hover{background:var(--terracotta);color:var(--cream)}
+
+.checklist{list-style:none;padding-left:0;border:1.5px solid var(--line);background:var(--cream)}
+.checklist li{display:flex;gap:14px;padding:14px 18px;border-bottom:1px solid var(--line);margin:0;align-items:flex-start}
+.checklist li:last-child{border-bottom:none}
+.checklist li::before{content:"☐";font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--bordeaux);font-size:18px;flex-shrink:0}
+.checklist li b{display:block;color:var(--ink);margin-bottom:2px}
+.checklist li span{color:var(--ink-soft);font-size:14px}
+
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;border-top:1.5px solid var(--line);border-left:1.5px solid var(--line);margin:30px 0}
+.fact{padding:22px 22px;border-right:1.5px solid var(--line);border-bottom:1.5px solid var(--line);background:var(--cream);min-height:130px;display:flex;flex-direction:column;gap:8px}
+.fact .k{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:var(--bordeaux)}
+.fact .v{font-family:'DM Serif Display',serif;font-size:clamp(20px,2vw,26px);line-height:1.1}
+.fact .d{font-size:13px;color:var(--ink-soft);margin-top:auto}
+
+.troubleshoot{border:2px solid var(--line);background:var(--bg-2);padding:0;margin:24px 0}
+.troubleshoot summary{padding:16px 22px;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--bordeaux);cursor:pointer;list-style:none}
+.troubleshoot summary::after{content:" ↓";float:right;color:var(--ink-soft)}
+.troubleshoot[open] summary::after{content:" ↑"}
+.troubleshoot[open] summary{border-bottom:1.5px solid var(--line)}
+.troubleshoot .body{padding:18px 22px}
+.troubleshoot .body p:last-child{margin-bottom:0}
+
+footer{border-top:1.5px solid var(--line);padding:40px 0;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-soft);letter-spacing:0.06em;text-transform:uppercase}
+footer a{color:var(--ink-soft)}
+
+.handy-card{background:oklch(96.5% 0.045 95);border:2.5px solid var(--line);padding:30px clamp(22px,4vw,40px);margin:24px 0 32px;display:grid;grid-template-columns:auto 1fr;gap:30px;align-items:center;box-shadow:8px 8px 0 var(--line);position:relative}
+.handy-card::before{content:"";position:absolute;top:-2.5px;right:-2.5px;width:80px;height:6px;background:var(--bordeaux)}
+.handy-card .visual{max-width:300px;width:100%}
+.handy-card .visual img{display:block;width:100%;height:auto}
+.handy-card .body .tag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;color:var(--bordeaux);text-transform:uppercase;font-weight:600;margin-bottom:12px;display:flex;flex-wrap:wrap;gap:6px 14px}
+.handy-card .body .tag span{display:inline-flex;align-items:center;gap:6px}
+.handy-card .body .tag span::before{content:"●";color:var(--ochre);font-size:10px}
+.handy-card .body .pitch{font-family:'DM Serif Display',serif;font-size:clamp(22px,2.6vw,32px);color:var(--ink);margin:0 0 10px;letter-spacing:-0.015em;line-height:1.1;max-width:24ch}
+.handy-card .body .pitch em{font-style:italic;color:var(--bordeaux)}
+.handy-card .body .copy{font-size:15.5px;color:var(--ink-soft);line-height:1.5;max-width:54ch;margin:0}
+.handy-card.compact{padding:22px 26px;margin:18px 0}
+.handy-card.compact .visual{max-width:200px}
+.handy-card.compact .body .pitch{font-size:clamp(20px,2vw,24px);margin-bottom:6px}
+.handy-card.compact .body .copy{font-size:14.5px}
+@media(max-width:760px){
+  .handy-card{grid-template-columns:1fr;gap:18px;padding:22px;box-shadow:5px 5px 0 var(--line)}
+  .handy-card .visual{max-width:220px;margin:0 auto}
+}
+
+@media(max-width:680px){
+  .tab-btn{padding:14px 14px;font-size:12px}
+  .tab-btn .num{font-size:18px}
+  pre{font-size:12.5px;padding:14px 16px}
+}
+</style>
+</head>
+<body>
+
+<nav class="portal-nav">
+  <div class="portal-nav-inner">
+    <a class="portal-brand" href="../">
+      <span class="spark"></span>
+      <span class="name"><b>Сила Тока</b><span>академия · персональный портал</span></span>
+    </a>
+    <div class="portal-links">
+      <a href="../">Главная</a>
+      <a href="../library/">Библиотека встреч</a>
+      <a href="./" class="active">Установка</a>
+      <a href="https://t.me/timzinin" target="_blank">Контакт</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+<header>
+  <span class="eyebrow">Сила Тока · 30 апреля 2026</span>
+  <h1>Как поставить <em>Codex</em> до начала занятия</h1>
+  <p class="lede">Минут 20 на двоих. Главный инструмент на завтра — Codex CLI в терминале. Claude Code — приятный бонус, если получится зарегистрировать Anthropic. Если не получится — это <b>не критично</b>, занятие пройдёт на Codex.</p>
+  <div class="meta">
+    <div><b>Род</b> macOS</div>
+    <div><b>Дмитрий</b> Windows</div>
+    <div><b>Подписка</b> Business ChatGPT &amp; Codex · 21 €/мес</div>
+    <div><b>Время</b> ~20 минут</div>
+  </div>
+</header>
+</div>
+
+<nav class="tabs">
+  <div class="wrap-tabs">
+    <button class="tab-btn active" data-tab="general">
+      <span class="num">01</span>
+      <span class="label"><span class="top">Вводные</span><span class="name">Общее</span></span>
+    </button>
+    <button class="tab-btn" data-tab="rod">
+      <span class="num">02</span>
+      <span class="label"><span class="top">macOS</span><span class="name">Род</span></span>
+    </button>
+    <button class="tab-btn" data-tab="dmitriy">
+      <span class="num">03</span>
+      <span class="label"><span class="top">Windows</span><span class="name">Дмитрий</span></span>
+    </button>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ============================================================ -->
+<!-- TAB 01 — ОБЩЕЕ -->
+<!-- ============================================================ -->
+<div class="tab-panel active" id="tab-general">
+
+<section>
+  <h2>Что мы знаем перед стартом</h2>
+  <div class="facts">
+    <div class="fact"><div class="k">VPN</div><div class="v">есть у обоих</div><div class="d">личный + корпоративный + EdgeWard</div></div>
+    <div class="fact"><div class="k">Иностранная карта</div><div class="v">есть</div><div class="d">валютная, рабочая для подписок</div></div>
+    <div class="fact"><div class="k">ChatGPT Business</div><div class="v">подключён</div><div class="d">21 €/мес у Рода и Дмитрия</div></div>
+    <div class="fact"><div class="k">Claude.ai</div><div class="v">не вышло</div><div class="d">требует не-российский номер</div></div>
+    <div class="fact"><div class="k">Род</div><div class="v">macOS</div><div class="d">личный аккаунт ChatGPT, опыт есть</div></div>
+    <div class="fact"><div class="k">Дмитрий</div><div class="v">Windows</div><div class="d">платных подписок не было, поверхностный опыт</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>Логика на завтра</h2>
+  <p><b>Главное — Codex CLI.</b> Подписка ChatGPT Business, которая у вас уже оплачена, открывает Codex CLI без дополнительных ключей и API-кредитов. Логин в одно нажатие через браузер.</p>
+  <aside class="handy-card compact">
+    <a class="visual" href="https://handy.computer" target="_blank"><img src="img/handy-logo.png" alt="Handy — speech to text" loading="lazy"></a>
+    <div class="body">
+      <div class="tag"><span>бесплатно</span><span>open source</span><span>локально</span></div>
+      <p class="pitch">Удобство — <em>Handy</em></p>
+      <p class="copy">Зажал клавишу — продиктовал — отпустил, текст вставляется в то поле, где курсор. В том числе в Codex. Распознаёт локально, аудио не уходит в облако — уместно с вашими NDA. Ставится за пару минут на Mac и Windows.</p>
+    </div>
+  </aside>
+  <p><b>Claude Code — опционально.</b> Регистрация в Claude.ai через российский номер не идёт. Один из путей — eSIM Казахстана/Сербии. Это второстепенная задача: если у Рода до утра получится завести Anthropic — поставим Claude Code сверху. Если нет — занятие пройдёт целиком на Codex.</p>
+  <div class="callout callout-ok">
+    <b>Минимум к утру:</b> у Рода и у Дмитрия в терминале запускается команда <code>codex</code> и открывает интерфейс. Всё остальное — бонус.
+  </div>
+</section>
+
+<section>
+  <h2>Что такое Codex CLI и зачем</h2>
+  <p>Codex — CLI-агент от OpenAI, живёт в терминале, читает файлы на вашем компьютере, исполняет команды и пишет код прямо в проект. В отличие от чата ChatGPT в браузере — он работает в среде вашей машины, видит вашу файловую систему, понимает что у вас открыто, создаёт и правит реальные файлы.</p>
+  <p>Это не «чат с улучшениями», это другой класс инструмента: вы перестаёте копировать туда-сюда, начинаете давать задачи и получать готовый результат — файл, страницу, скрипт, репозиторий.</p>
+</section>
+
+<section>
+  <h2>На занятии разберём</h2>
+  <p>Цель — пройти полную цепочку от запроса до опубликованного результата своими руками. У каждого получится готовый артефакт в вашем GitHub.</p>
+  <ul>
+    <li><b>Скиллы</b> — переиспользуемые рецепты, которые вы один раз описали словами и дальше вызываете одной командой</li>
+    <li><b>Агенты</b> — делегирование задачи отдельному «специалисту» с собственным контекстом (ресёрчер, копирайтер, дизайнер, ревьюер)</li>
+    <li><b>MCP</b> — подключаемые внешние инструменты: поиск, доступ к файлам, к GitHub, к браузеру, к вашим локальным сервисам</li>
+    <li><b>End-to-end pipeline</b> — пройдём всю цепочку: поиск информации → обработка → сборка сайта → публикация в GitHub Pages под вашим аккаунтом</li>
+  </ul>
+  <p>В конце занятия у каждого из вас будет: установленный Codex, понимание трёх ключевых концепций (скилл / агент / MCP) и собственная страница в интернете, которую вы собрали голосом и руками за полтора часа.</p>
+</section>
+
+<section>
+  <h2>Ответы на вопросы из вчерашних голосовых</h2>
+
+  <details class="troubleshoot">
+    <summary>Если Claude не получится поставить — критично?</summary>
+    <div class="body">
+      <p>Нет, не критично. Занятие построено на Codex. Claude Code — это дополнительный инструмент, который мы поставим, если у Рода удастся завершить регистрацию (через зарубежную eSIM или сервис временных номеров). До утра тратить силы на Claude не нужно — лучше довести Codex до запуска у обоих.</p>
+    </div>
+  </details>
+
+  <details class="troubleshoot">
+    <summary>Личные или корпоративные аккаунты — что выбрать сейчас</summary>
+    <div class="body">
+      <p>На стадии «двое за две недели» — личные. Корпоративная схема с расчётным счётом для зарубежных подписок не собирается без отдельной юр-конструкции, и с учётом ваших NDA и регуляторных ограничений переход на enterprise — отдельный спринт после того, как два человека реально начнут получать пользу. Сейчас корректно: личные аккаунты Рода и Дмитрия, оплата с зарубежной карты владельца или айтишника.</p>
+    </div>
+  </details>
+
+  <details class="troubleshoot">
+    <summary>Что с NDA и чувствительной документацией</summary>
+    <div class="body">
+      <p>Любые документы под NDA — ни в Codex, ни в Claude, ни в ChatGPT в открытом виде не отправляем. Тренируемся на обезличенных или публичных материалах — задачи и принципы те же, а данные ничьих NDA не нарушают. Под чувствительный класс (внутренние документы, проекты под регуляторные ограничения) уместен отдельный контур на локальных моделях — это материал следующей встречи, не сегодня.</p>
+    </div>
+  </details>
+
+</section>
+
+<div class="callout callout-warn">
+  <b>Если на каком-то шаге что-то идёт не так</b> — пришлите скриншот в Telegram <a href="https://t.me/timzinin" target="_blank">@timzinin</a> в Telegram <a href="https://t.me/timzinin" target="_blank">@timzinin</a>.
+</div>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- TAB 02 — РОД (macOS) -->
+<!-- ============================================================ -->
+<div class="tab-panel" id="tab-rod">
+
+<section>
+  <h2>Род · <em>macOS</em></h2>
+  <p>Полный путь — около 15 минут на чистом маке. Если Node.js уже стоит — 5 минут.</p>
+</section>
+
+<section>
+  <h3><span class="step">Шаг 1</span>Открыть Терминал</h3>
+  <p>На Mac: <code>⌘ + пробел</code> → набрать <b>Terminal</b> → Enter. Откроется чёрное (или белое) окно. Это и есть терминал, в нём всё происходит.</p>
+</section>
+
+<section>
+  <h3><span class="step">Шаг 2</span>Поставить Node.js</h3>
+  <p>Codex CLI распространяется через npm — менеджер пакетов из мира Node.js. Поэтому сначала Node.</p>
+  <p><b>Самый простой путь:</b> зайти на <a href="https://nodejs.org/" target="_blank">nodejs.org</a>, нажать большую зелёную кнопку «Download Node.js (LTS)», открыть скачанный .pkg, нажимать Continue / Install. Установщик стандартный.</p>
+  <p>После установки в терминале проверить:</p>
+  <pre><button class="copy">copy</button><code>node -v
+npm -v</code></pre>
+  <p>Должны вывестись две строчки с номерами версий, например <code>v22.11.0</code> и <code>10.9.0</code>. Если вышли — идём дальше.</p>
+  <details class="troubleshoot">
+    <summary>command not found: node</summary>
+    <div class="body">
+      <p>Закройте терминал и откройте заново — установщик Node иногда не сразу подцепляется в открытую сессию. Если и после этого не работает — пришлите скриншот в Telegram <a href="https://t.me/timzinin" target="_blank">@timzinin</a>.</p>
+    </div>
+  </details>
+</section>
+
+<section>
+  <h3><span class="step">Шаг 3</span>Поставить Codex CLI</h3>
+  <pre><button class="copy">copy</button><code>npm install -g @openai/codex</code></pre>
+  <p>Установка занимает 30–60 секунд. В конце должно появиться сообщение <code>added N packages</code>.</p>
+  <p>Проверить:</p>
+  <pre><button class="copy">copy</button><code>codex --version</code></pre>
+  <details class="troubleshoot">
+    <summary>EACCES / Permission denied на npm install -g</summary>
+    <div class="body">
+      <p>Запустите ту же команду с <code>sudo</code>:</p>
+      <pre><button class="copy">copy</button><code>sudo npm install -g @openai/codex</code></pre>
+      <p>Терминал спросит пароль от мака — это пароль учётной записи macOS, не от ChatGPT.</p>
+    </div>
+  </details>
+</section>
+
+<section>
+  <h3><span class="step">Шаг 4</span>Войти в свой ChatGPT-аккаунт</h3>
+  <p>В терминале:</p>
+  <pre><button class="copy">copy</button><code>codex</code></pre>
+  <p>При первом запуске Codex предложит выбрать способ авторизации. Выбираем <b>Sign in with ChatGPT</b> — Codex откроет браузер. В браузере залогиниться той же почтой, что и ваш ChatGPT Business аккаунт за 21 €. Подтвердить разрешение для CLI. Браузер скажет «You can close this tab». В терминале появится приглашение Codex.</p>
+  <div class="callout callout-ok"><b>Подписка Business ChatGPT &amp; Codex</b> уже включает доступ к Codex CLI без отдельных API-ключей. Дополнительно ничего платить не нужно.</div>
+</section>
+
+<section>
+  <h3><span class="step">Шаг 5</span>Проверка боем</h3>
+  <p>В Codex (после логина) набрать на русском:</p>
+  <pre><button class="copy">copy</button><code>напиши маленький python-скрипт, который печатает "сила тока" и сегодняшнюю дату</code></pre>
+  <p>Codex покажет план, спросит подтверждение и создаст файл рядом. Если файл создался — установка прошла. Можно закрывать терминал — занятие проведём с этого же места.</p>
+</section>
+
+<section>
+  <h3><span class="step">Шаг 6</span>Handy — голосовой ввод в терминал</h3>
+  <aside class="handy-card">
+    <a class="visual" href="https://handy.computer" target="_blank"><img src="img/handy-logo.png" alt="Handy — speech to text" loading="lazy"></a>
+    <div class="body">
+      <div class="tag"><span>бесплатно</span><span>open source</span><span>локально</span></div>
+      <p class="pitch">Speak into <em>any text field</em></p>
+      <p class="copy">Маленькая утилита, которая превращает Mac в надиктовщика: зажал клавишу → говоришь → отпустил, текст вставляется в курсор. В том числе в окно Codex.</p>
+    </div>
+  </aside>
+  <p>Зачем для нашей задачи: ставить задачу Codex, описывать что вы хотите получить на выходе, надиктовывать длинные тексты и заметки — намного быстрее, чем набирать. Распознавание происходит локально на маке, ничего не уходит в облако.</p>
+  <p>Скачать .dmg под ваш мак с <a href="https://handy.computer/download" target="_blank">handy.computer/download</a>:</p>
+  <ul>
+    <li><b>Apple Silicon</b> (M1/M2/M3/M4 — почти все маки с 2020 года) → <a href="https://github.com/cjpais/Handy/releases/download/v0.8.3/Handy_0.8.3_aarch64.dmg" target="_blank">Handy_0.8.3_aarch64.dmg</a></li>
+    <li><b>Intel</b> (старые маки до 2020) → <a href="https://github.com/cjpais/Handy/releases/download/v0.8.3/Handy_0.8.3_x64.dmg" target="_blank">Handy_0.8.3_x64.dmg</a></li>
+  </ul>
+  <p>Узнать какой у вас процессор: <b>яблоко в углу → About This Mac</b>. Если в строке Chip написано Apple M1/M2/M3/M4 — берёте Apple Silicon. Если Intel — Intel.</p>
+  <p>Установка стандартная: открыть .dmg, перетащить иконку Handy в папку Applications. При первом запуске macOS попросит разрешить доступ к микрофону и accessibility (нужно чтобы вставлять текст в чужие приложения) — System Settings → Privacy &amp; Security разрешить.</p>
+  <p>Горячая клавиша по умолчанию настраивается при первом запуске. Возьмите что-то редкое — например <code>F5</code> или <code>Right Option</code>. Дальше: зажали → продиктовали запрос → отпустили → текст вылезет в Codex.</p>
+</section>
+
+<section>
+  <h3><span class="step">Опционально</span>Claude Code</h3>
+  <p>Делать только если уже разобрались с регистрацией Anthropic (eSIM Казахстана/Сербии). Если регистрация в Claude.ai не пройдена — пропускайте, утром достаточно одного Codex.</p>
+  <pre><button class="copy">copy</button><code>npm install -g @anthropic-ai/claude-code</code></pre>
+  <p>Запуск:</p>
+  <pre><button class="copy">copy</button><code>claude</code></pre>
+  <p>Откроется браузер для логина в Claude.ai. После логина в терминале появится приглашение Claude Code. На макс/про подписку он работает «из коробки».</p>
+  <details class="troubleshoot">
+    <summary>Регистрация Anthropic — почему телефон отказывает</summary>
+    <div class="body">
+      <p>Anthropic не принимает российские и белорусские номера на этапе верификации. Рабочие пути: eSIM Казахстана (например, KCell), eSIM Сербии (через знакомых на месте, без паспорта), временный номер 5sim.net (риск — номер может быть «сожжён» прошлыми попытками регистрации в Anthropic). Любой иностранный реальный номер сработает.</p>
+    </div>
+  </details>
+</section>
+
+<section>
+  <h2>Финальный чеклист — Род</h2>
+  <ul class="checklist">
+    <li><b>Node.js установлен</b><span><code>node -v</code> выводит версию</span></li>
+    <li><b>Codex CLI установлен</b><span><code>codex --version</code> выводит версию</span></li>
+    <li><b>Залогинен в ChatGPT Business</b><span>команда <code>codex</code> открывает интерфейс агента</span></li>
+    <li><b>Тестовый python создан</b><span>файл с «сила тока» и датой лежит в папке</span></li>
+    <li><b>Handy установлен</b><span>горячая клавиша диктует текст в Codex</span></li>
+    <li><b>(Бонус) Claude Code</b><span>только если есть валидный Anthropic-аккаунт</span></li>
+  </ul>
+</section>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- TAB 03 — ДМИТРИЙ (Windows) -->
+<!-- ============================================================ -->
+<div class="tab-panel" id="tab-dmitriy">
+
+<section>
+  <h2>Дмитрий · <em>Windows</em></h2>
+  <p>Полный путь — около 20 минут на чистой винде. Никакого WSL, никакого Linux — всё работает в обычной PowerShell.</p>
+</section>
+
+<section>
+  <h3><span class="step">Шаг 1</span>Открыть PowerShell</h3>
+  <p>Нажать <b>Win + X</b> → выбрать <b>Terminal</b> или <b>PowerShell</b>. Откроется синее окно с приглашением. Если <b>Terminal</b> в меню нет — наберите в поиске Windows слово «PowerShell» и откройте его.</p>
+  <p>Все команды ниже копируются в это окно (правой кнопкой мыши вставляется текст).</p>
+</section>
+
+<section>
+  <h3><span class="step">Шаг 2</span>Поставить Node.js</h3>
+  <p>Codex CLI распространяется через npm — менеджер пакетов Node.js. Поэтому сначала Node.</p>
+  <p>Зайти на <a href="https://nodejs.org/" target="_blank">nodejs.org</a>, нажать большую зелёную кнопку «Download Node.js (LTS)», открыть .msi-файл, нажимать Next → Install → Finish. Установщик стандартный, ничего не меняем.</p>
+  <p>После установки <b>закрыть PowerShell и открыть заново</b> (это важно — иначе он не увидит новый Node). Проверить:</p>
+  <pre><button class="copy">copy</button><code>node -v
+npm -v</code></pre>
+  <p>Должны вывестись две строчки с номерами версий, например <code>v22.11.0</code> и <code>10.9.0</code>.</p>
+</section>
+
+<section>
+  <h3><span class="step">Шаг 3</span>Поставить Codex CLI</h3>
+  <pre><button class="copy">copy</button><code>npm install -g @openai/codex</code></pre>
+  <p>Установка идёт 30–60 секунд. В конце появится <code>added N packages</code>.</p>
+  <p>Проверка:</p>
+  <pre><button class="copy">copy</button><code>codex --version</code></pre>
+  <details class="troubleshoot">
+    <summary>«не удаётся выполнить сценарий, выполнение сценариев отключено»</summary>
+    <div class="body">
+      <p>Windows по умолчанию блокирует запуск глобально установленных скриптов. Один раз разрешаем для текущего пользователя:</p>
+      <pre><button class="copy">copy</button><code>Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned</code></pre>
+      <p>На вопрос ответить <code>Y</code>. После этого <code>codex --version</code> сработает.</p>
+    </div>
+  </details>
+  <details class="troubleshoot">
+    <summary>«codex не является внутренней или внешней командой»</summary>
+    <div class="body">
+      <p>Закройте PowerShell и откройте заново. Если не помогло — перезагрузите компьютер один раз (Windows иногда долго прописывает PATH).</p>
+    </div>
+  </details>
+</section>
+
+<section>
+  <h3><span class="step">Шаг 4</span>Войти в свой ChatGPT-аккаунт</h3>
+  <p>В PowerShell:</p>
+  <pre><button class="copy">copy</button><code>codex</code></pre>
+  <p>При первом запуске Codex предложит выбрать способ авторизации. Выбираем <b>Sign in with ChatGPT</b> — Codex откроет браузер. В браузере залогиниться той же почтой, что и ваш ChatGPT Business аккаунт за 21 €. Подтвердить разрешение. Браузер скажет «You can close this tab». В PowerShell появится приглашение Codex.</p>
+  <div class="callout callout-ok"><b>Подписка Business ChatGPT &amp; Codex</b> уже включает доступ к Codex CLI без отдельных API-ключей. Ключи и кредиты OpenAI отдельно покупать не нужно.</div>
+</section>
+
+<section>
+  <h3><span class="step">Шаг 5</span>Проверка боем</h3>
+  <p>В Codex (после логина) набрать на русском:</p>
+  <pre><button class="copy">copy</button><code>напиши маленький python-скрипт, который печатает "сила тока" и сегодняшнюю дату</code></pre>
+  <p>Codex покажет план, спросит подтверждение и создаст файл рядом. Если файл создался — установка прошла. Можно закрывать PowerShell.</p>
+</section>
+
+<section>
+  <h3><span class="step">Шаг 6</span>Handy — голосовой ввод в терминал</h3>
+  <aside class="handy-card">
+    <a class="visual" href="https://handy.computer" target="_blank"><img src="img/handy-logo.png" alt="Handy — speech to text" loading="lazy"></a>
+    <div class="body">
+      <div class="tag"><span>бесплатно</span><span>open source</span><span>локально</span></div>
+      <p class="pitch">Speak into <em>any text field</em></p>
+      <p class="copy">Маленькая утилита, которая превращает Windows в надиктовщика: зажал клавишу → говоришь → отпустил, текст вставляется в курсор. В том числе в PowerShell с Codex.</p>
+    </div>
+  </aside>
+  <p>Зачем для нашей задачи: ставить задачу Codex, описывать что вы хотите получить на выходе, надиктовывать длинные тексты и заметки — намного быстрее, чем набирать. Распознавание происходит локально на компьютере, ничего не уходит в облако.</p>
+  <p>Скачать установщик с <a href="https://handy.computer/download" target="_blank">handy.computer/download</a>:</p>
+  <ul>
+    <li><b>Обычный ПК или ноутбук с Intel/AMD</b> (99% случаев) → <a href="https://github.com/cjpais/Handy/releases/download/v0.8.3/Handy_0.8.3_x64-setup.exe" target="_blank">Handy_0.8.3_x64-setup.exe</a></li>
+    <li><b>Windows on ARM</b> (если у вас Surface Pro X или похожий ARM-ноутбук) → <a href="https://github.com/cjpais/Handy/releases/download/v0.8.3/Handy_0.8.3_arm64-setup.exe" target="_blank">Handy_0.8.3_arm64-setup.exe</a></li>
+  </ul>
+  <p>Узнать какой процессор: <b>правой кнопкой по «Этот компьютер» → Свойства</b>. Если процессор Intel или AMD — берёте x64. Если Snapdragon/ARM — arm64.</p>
+  <p>Установка стандартная: запустить .exe, нажать Next → Install → Finish. Windows может предупредить «не известный издатель» — More info → Run anyway. При первом запуске разрешить доступ к микрофону.</p>
+  <p>Горячая клавиша настраивается при первом запуске — возьмите что-то редкое, например <code>F5</code> или <code>Right Ctrl</code>. Дальше: зажали → продиктовали запрос → отпустили → текст вылезет в PowerShell.</p>
+</section>
+
+<section>
+  <h3><span class="step">Опционально</span>Claude Code</h3>
+  <p>Делать только если получится зарегистрировать аккаунт в Claude.ai. На винде Claude Code работает нативно через ту же PowerShell — WSL2 не нужен.</p>
+  <pre><button class="copy">copy</button><code>npm install -g @anthropic-ai/claude-code</code></pre>
+  <p>Запуск:</p>
+  <pre><button class="copy">copy</button><code>claude</code></pre>
+  <p>Откроется браузер для логина в Claude.ai. На вашу проблему с телефоном смотрите ниже.</p>
+  <details class="troubleshoot">
+    <summary>«Claude.ai требует заграничный номер» — пути решения</summary>
+    <div class="body">
+      <p>Anthropic не принимает российские и белорусские номера. Варианты по убыванию надёжности:</p>
+      <ul>
+        <li><b>eSIM Казахстана</b> — оператор KCell, оформляется онлайн, есть постоянный номер для будущих верификаций</li>
+        <li><b>eSIM Сербии</b> — через знакомых на месте, паспорт не требуется</li>
+        <li><b>5sim.net</b> — временный номер. Дёшево, но номер мог быть «сожжён» предыдущими регистрациями в Anthropic, гарантий нет</li>
+      </ul>
+      <p>Если до утра не получится — это нормально. Утром поставим только Codex и начнём занятие.</p>
+    </div>
+  </details>
+</section>
+
+<section>
+  <h2>Финальный чеклист — Дмитрий</h2>
+  <ul class="checklist">
+    <li><b>Node.js установлен</b><span><code>node -v</code> выводит версию</span></li>
+    <li><b>Codex CLI установлен</b><span><code>codex --version</code> выводит версию</span></li>
+    <li><b>Залогинен в ChatGPT Business</b><span>команда <code>codex</code> открывает интерфейс агента</span></li>
+    <li><b>Тестовый python создан</b><span>файл с «сила тока» и датой лежит в папке</span></li>
+    <li><b>Handy установлен</b><span>горячая клавиша диктует текст в Codex</span></li>
+    <li><b>(Бонус) Claude Code</b><span>только если есть валидный Anthropic-аккаунт</span></li>
+  </ul>
+</section>
+
+</div>
+
+</main>
+
+<footer class="portal-footer">
+  <div class="inner">
+    <span>Сила Тока · Академия · установка</span>
+    <span><a href="../">← на главную портала</a></span>
+    <span><a href="https://t.me/timzinin" target="_blank">@timzinin</a></span>
+  </div>
+</footer>
+
+<script>
+const tabs = document.querySelectorAll('.tab-btn');
+const panels = document.querySelectorAll('.tab-panel');
+tabs.forEach(b => b.addEventListener('click', () => {
+  tabs.forEach(x => x.classList.remove('active'));
+  panels.forEach(p => p.classList.remove('active'));
+  b.classList.add('active');
+  document.getElementById('tab-' + b.dataset.tab).classList.add('active');
+  history.replaceState(null, '', '#' + b.dataset.tab);
+  window.scrollTo({top:0, behavior:'smooth'});
+}));
+const initial = location.hash.replace('#','');
+if (['general','rod','dmitriy'].includes(initial)) {
+  document.querySelector('.tab-btn[data-tab="'+initial+'"]').click();
+}
+
+document.querySelectorAll('.copy').forEach(btn => {
+  btn.addEventListener('click', e => {
+    const code = btn.parentElement.querySelector('code').innerText;
+    navigator.clipboard.writeText(code).then(() => {
+      const old = btn.textContent;
+      btn.textContent = 'ok';
+      setTimeout(() => btn.textContent = old, 1200);
+    });
+  });
+});
+</script>
+
+</body>
+</html>

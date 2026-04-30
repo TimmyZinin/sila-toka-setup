@@ -3,67 +3,127 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Занятие 30 апреля — Настройка Codex CLI · Сила Тока · Академия</title>
-<meta name="description" content="Запись и материалы первого занятия для Рода и Дмитрия. Настройка Codex CLI, Handy, основы работы со скиллами и агентами.">
+<title>Урок 02 — Настройка Codex CLI и работа с ним · Академия Силы Тока</title>
+<meta name="description" content="Запись и материалы первого живого занятия для Рода и Дмитрия (30 апреля 2026). Настройка Codex CLI, Handy, скиллы, агенты, MCP.">
 <link rel="canonical" href="https://timzinin.com/sila-toka-setup/library/2026-04-30/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../_portal.css">
 <style>
-.lesson-head{padding:clamp(40px,6vw,80px) 0 clamp(30px,4vw,50px)}
-.crumbs{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:24px}
-.crumbs a{color:var(--ink-soft)}
-.crumbs a:hover{color:var(--bordeaux)}
-.crumbs .sep{color:var(--ochre);margin:0 8px}
-.lesson-head h1{font-size:clamp(40px,6.5vw,84px);max-width:18ch;margin-bottom:20px;line-height:1.02}
-.lesson-head h1 em{font-style:italic;color:var(--bordeaux)}
-.lesson-head .lede{font-size:clamp(17px,1.5vw,20px);max-width:62ch;color:var(--ink-soft);margin:0 0 26px}
-.lesson-meta{display:flex;flex-wrap:wrap;gap:16px 30px;font-family:'JetBrains Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.08em}
-.lesson-meta b{color:var(--bordeaux);display:block;font-size:11px;font-weight:600;letter-spacing:0.12em;margin-bottom:3px}
+.lesson-layout{display:grid;grid-template-columns:1fr 280px;gap:clamp(30px,4vw,56px);padding:clamp(30px,4vw,50px) 0 clamp(60px,7vw,100px)}
+@media(max-width:980px){.lesson-layout{grid-template-columns:1fr}}
 
-.video-card{background:var(--ink);color:var(--cream);border:2.5px solid var(--line);box-shadow:8px 8px 0 var(--line);overflow:hidden;margin:30px 0 50px;display:grid;grid-template-columns:1.3fr 1fr;gap:0;min-height:340px}
-@media(max-width:780px){.video-card{grid-template-columns:1fr}}
-.video-poster{position:relative;background:linear-gradient(135deg, oklch(28% 0.08 30) 0%, oklch(20% 0.04 40) 100%);display:flex;align-items:center;justify-content:center;min-height:280px;overflow:hidden}
-.video-poster::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle at 30% 40%, oklch(58% 0.17 45) 0, transparent 60%),radial-gradient(circle at 70% 70%, oklch(72% 0.14 75) 0, transparent 55%);opacity:0.55;mix-blend-mode:overlay}
-.video-poster::after{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(45deg, transparent 0 8px, oklch(28% 0.08 30 / 0.18) 8px 9px);pointer-events:none}
-.play-btn{position:relative;z-index:2;width:108px;height:108px;border-radius:50%;background:var(--bordeaux);border:5px solid var(--cream);display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 14px 40px rgba(0,0,0,0.35);transition:transform .15s,background .15s}
-.play-btn::after{content:"";display:block;width:0;height:0;border:22px solid transparent;border-left:36px solid var(--cream);margin-left:8px}
-.play-btn:hover{background:var(--terracotta);transform:scale(1.05)}
-.poster-tag{position:absolute;top:18px;left:18px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ochre);background:oklch(20% 0.04 40 / 0.6);padding:6px 12px;border:1.5px solid var(--ochre);z-index:2;backdrop-filter:blur(4px)}
-.poster-duration{position:absolute;bottom:18px;right:18px;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:var(--cream);background:rgba(0,0,0,0.6);padding:5px 11px;z-index:2}
+.lesson-head{padding-bottom:clamp(24px,3vw,40px);border-bottom:1px solid var(--line);margin-bottom:30px}
+.lesson-meta-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.tag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-muted);font-weight:600;padding:5px 11px;background:var(--soft);border-radius:5px}
+.tag--video{background:oklch(94% 0.05 130);color:oklch(40% 0.12 140)}
+.tag--accent{background:var(--primary);color:var(--soft)}
 
-.video-info{padding:30px clamp(24px,3vw,38px);display:flex;flex-direction:column;gap:14px;background:var(--ink)}
-.video-info .platform{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ochre);font-weight:600}
-.video-info h3{font-family:'DM Serif Display',serif;font-size:28px;color:var(--cream);line-height:1.1;letter-spacing:-0.01em;margin:0}
-.video-info .pass{display:flex;flex-direction:column;gap:4px;margin-top:8px}
-.video-info .pass-label{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.18em;text-transform:uppercase;color:oklch(70% 0.04 85)}
-.video-info .pass-code{display:flex;align-items:center;gap:10px;background:oklch(28% 0.04 40);border:1.5px solid oklch(50% 0.04 40);padding:12px 16px;font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:600;color:var(--ochre);letter-spacing:0.08em}
-.video-info .pass-code button{margin-left:auto;background:var(--ochre);border:none;color:var(--ink);font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.1em;padding:6px 11px;cursor:pointer;text-transform:uppercase}
-.video-info .pass-code button:hover{background:var(--terracotta);color:var(--cream)}
-.video-info .open-link{margin-top:auto;display:inline-flex;align-items:center;gap:10px;background:var(--bordeaux);color:var(--cream);font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:14px 20px;text-decoration:none;border:2px solid var(--bordeaux);transition:background .15s}
-.video-info .open-link::after{content:"↗"}
-.video-info .open-link:hover{background:var(--terracotta);border-color:var(--terracotta)}
+.lesson-head h1{font-family:'DM Serif Display',serif;font-size:clamp(38px,5.5vw,68px);line-height:1.02;letter-spacing:-0.03em;margin:8px 0 18px;max-width:18ch}
+.lesson-head h1 em{font-style:italic;color:var(--primary)}
+.lesson-head .lede{font-size:clamp(17px,1.4vw,19px);line-height:1.55;color:var(--ink-soft);margin:0;max-width:62ch}
 
-section{margin-bottom:60px}
-section h2{font-size:clamp(28px,4vw,44px);max-width:24ch;margin:50px 0 18px;line-height:1.05}
-section h2 em{color:var(--bordeaux);font-style:italic}
-section p{margin:0 0 14px;max-width:64ch;line-height:1.6}
-section ul{padding-left:22px;margin:0 0 14px;max-width:64ch}
-section li{margin-bottom:10px;line-height:1.5}
+/* === VIDEO CARD with real preview === */
+.video-card{display:block;text-decoration:none;color:inherit;background:var(--ink);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:30px 0;transition:transform .2s,box-shadow .2s;position:relative}
+.video-card:hover{transform:translateY(-3px);box-shadow:0 22px 60px -24px oklch(20% 0.04 30 / 0.4)}
+.video-cover{position:relative;aspect-ratio:16/9;overflow:hidden;background:#0a0a0a}
+.video-cover img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.video-card:hover .video-cover img{transform:scale(1.02)}
+.video-cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg, transparent 50%, oklch(0% 0 0 / 0.55) 100%);pointer-events:none}
+.play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:clamp(78px,9vw,108px);height:clamp(78px,9vw,108px);border-radius:50%;background:var(--primary);border:4px solid oklch(98% 0.012 85 / 0.95);display:flex;align-items:center;justify-content:center;box-shadow:0 14px 40px oklch(0% 0 0 / 0.45);transition:transform .15s,background .15s;z-index:2}
+.play-btn::after{content:"";display:block;width:0;height:0;border:clamp(16px,2vw,22px) solid transparent;border-left:clamp(28px,3.4vw,36px) solid var(--soft);margin-left:8px}
+.video-card:hover .play-btn{transform:translate(-50%,-50%) scale(1.06);background:var(--secondary)}
+.video-tag{position:absolute;top:18px;left:18px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--soft);background:oklch(0% 0 0 / 0.55);padding:6px 12px;border-radius:5px;font-weight:600;display:flex;align-items:center;gap:8px;backdrop-filter:blur(4px);z-index:3}
+.video-tag .pulse{display:inline-block;width:7px;height:7px;border-radius:50%;background:#ff5d5d;animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.video-duration{position:absolute;bottom:18px;right:18px;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:var(--soft);background:oklch(0% 0 0 / 0.65);padding:5px 11px;border-radius:5px;z-index:3}
 
-.toc{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0;border-top:2px solid var(--line);border-left:2px solid var(--line);background:var(--cream);margin:24px 0}
-.toc-item{padding:18px 22px;border-right:2px solid var(--line);border-bottom:2px solid var(--line);background:var(--cream);min-height:90px;display:flex;flex-direction:column;gap:5px;transition:background .15s}
-.toc-item:hover{background:var(--peach)}
-.toc-item .t{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.08em;color:var(--bordeaux);font-weight:600}
-.toc-item .n{font-family:'DM Serif Display',serif;font-size:18px;color:var(--ink);line-height:1.2}
+.video-info{padding:clamp(22px,2.8vw,32px);background:var(--ink);color:var(--soft);display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
+@media(max-width:680px){.video-info{grid-template-columns:1fr;gap:16px}}
+.video-info .platform{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);font-weight:700;display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.video-info .platform::before{content:"";display:inline-block;width:6px;height:6px;background:var(--accent);border-radius:50%}
+.video-info h3{font-family:'DM Serif Display',serif;font-size:clamp(22px,2.4vw,30px);line-height:1.1;letter-spacing:-0.02em;color:var(--soft);margin:0 0 10px}
+.video-info .pass-mini{font-family:'Space Grotesk',sans-serif;font-size:14px;color:oklch(80% 0.04 85);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.video-info .pass-mini code{background:oklch(28% 0.04 40);color:var(--accent);padding:4px 9px;font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:600;letter-spacing:0.04em;border-radius:4px}
+.video-info .pass-mini button{background:var(--accent);border:none;color:var(--ink);font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.1em;padding:5px 9px;cursor:pointer;text-transform:uppercase;border-radius:4px}
+.video-info .pass-mini button:hover{background:var(--secondary);color:var(--soft)}
+.video-info .open-btn{display:inline-flex;align-items:center;gap:9px;background:var(--accent);color:var(--ink);font-family:'Space Grotesk',sans-serif;font-size:14.5px;font-weight:600;text-decoration:none;padding:13px 22px;border-radius:8px;transition:background .15s}
+.video-info .open-btn:hover{background:var(--secondary);color:var(--soft)}
+.video-info .open-btn::after{content:"↗";font-size:16px}
 
-.next-card{background:var(--cream);border:2.5px solid var(--line);box-shadow:6px 6px 0 var(--line);padding:26px clamp(22px,3vw,32px);margin-top:30px;display:flex;flex-direction:column;gap:10px}
-.next-card .small{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--bordeaux);font-weight:600}
-.next-card h3{font-family:'DM Serif Display',serif;font-size:26px;margin:0;line-height:1.1}
-.next-card .actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-.next-card .actions a{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;padding:9px 14px;border:1.5px solid var(--bordeaux);color:var(--bordeaux);text-decoration:none;background:var(--bg);transition:background .15s,color .15s}
-.next-card .actions a:hover{background:var(--bordeaux);color:var(--cream)}
+/* === CONTENT BLOCKS === */
+.lesson-content section.block{padding:clamp(36px,5vw,60px) 0;border-top:1px solid var(--line)}
+.lesson-content section.block:first-of-type{border-top:none;padding-top:0}
+.lesson-content h2{font-family:'DM Serif Display',serif;font-size:clamp(28px,3.5vw,42px);line-height:1.05;letter-spacing:-0.025em;margin:0 0 12px;max-width:24ch}
+.lesson-content h2 em{font-style:italic;color:var(--primary)}
+.lesson-content .block-lede{font-size:16px;line-height:1.6;color:var(--ink-soft);margin:0 0 26px;max-width:60ch}
+.lesson-content p{margin:0 0 14px;font-size:16.5px;line-height:1.65;color:var(--ink);max-width:60ch}
+.lesson-content p b{color:var(--primary);font-weight:600}
+.lesson-content code{font-family:'JetBrains Mono',monospace;background:var(--bg-2);color:var(--primary);padding:1px 6px;border-radius:3px;font-size:0.92em}
+
+.outline{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--paper);margin:0}
+@media(max-width:680px){.outline{grid-template-columns:1fr}}
+.outline-item{padding:18px 22px;display:flex;flex-direction:column;gap:8px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--paper);transition:background .15s}
+.outline-item:hover{background:var(--soft)}
+.outline-item:nth-child(2n){border-right:none}
+.outline-item:nth-last-child(-n+2){border-bottom:none}
+@media(max-width:680px){.outline-item{border-right:none;border-bottom:1px solid var(--line)}.outline-item:last-child{border-bottom:none}}
+.outline-item .num{font-family:'DM Serif Display',serif;font-size:32px;color:var(--primary);line-height:1;letter-spacing:-0.03em}
+.outline-item .name{font-family:'DM Serif Display',serif;font-size:19px;letter-spacing:-0.015em;line-height:1.2;color:var(--ink)}
+
+.takeaways{display:flex;flex-direction:column;gap:10px}
+.takeaway{display:grid;grid-template-columns:auto 1fr;gap:18px;padding:18px 22px;background:var(--paper);border:1px solid var(--line);border-radius:10px;align-items:start;transition:border-color .2s}
+.takeaway:hover{border-color:var(--primary)}
+.takeaway .marker{font-family:'DM Serif Display',serif;font-size:30px;color:var(--primary);line-height:1;letter-spacing:-0.025em;font-weight:400;width:36px;flex-shrink:0;text-align:center}
+.takeaway .body p{margin:0;font-size:16px;line-height:1.55;max-width:60ch}
+.takeaway .body p b{color:var(--primary);font-weight:600}
+
+.materials{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:680px){.materials{grid-template-columns:1fr}}
+.material{padding:18px 22px;background:var(--paper);text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:10px;transition:border-color .2s,transform .15s;display:flex;flex-direction:column;gap:6px;position:relative}
+.material:hover{border-color:var(--primary);transform:translateY(-1px)}
+.material .lbl{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-muted);font-weight:600}
+.material .ttl{font-family:'DM Serif Display',serif;font-size:20px;letter-spacing:-0.02em;line-height:1.2}
+.material .url{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-muted)}
+.material::after{content:"↗";position:absolute;top:18px;right:22px;font-size:16px;color:var(--primary);transition:transform .15s}
+.material:hover::after{transform:translate(2px,-2px)}
+
+.homework{padding:clamp(28px,3.5vw,40px);background:var(--soft);border:1px solid var(--line);border-radius:14px;border-left:5px solid var(--primary);margin-top:20px}
+.homework .small{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--primary);font-weight:700;margin-bottom:10px;display:block}
+.homework h3{font-family:'DM Serif Display',serif;font-size:clamp(24px,2.6vw,30px);line-height:1.1;letter-spacing:-0.02em;margin:0 0 10px}
+.homework h3 em{font-style:italic;color:var(--primary)}
+.homework p{margin:0 0 14px;color:var(--ink);font-size:16px;line-height:1.6;max-width:60ch}
+.homework .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+
+/* === LESSON NAV (prev/next) === */
+.lesson-nav{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:50px;padding-top:30px;border-top:1px solid var(--line)}
+@media(max-width:680px){.lesson-nav{grid-template-columns:1fr}}
+.lesson-nav-link{padding:20px 24px;background:var(--paper);border:1px solid var(--line);border-radius:10px;text-decoration:none;color:var(--ink);transition:border-color .2s,transform .15s;display:flex;flex-direction:column;gap:5px}
+.lesson-nav-link:hover{border-color:var(--primary);transform:translateY(-1px)}
+.lesson-nav-link .l{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-muted);font-weight:600;display:flex;align-items:center;gap:7px}
+.lesson-nav-link.next{text-align:right}
+.lesson-nav-link.next .l{justify-content:flex-end}
+.lesson-nav-link .name{font-family:'DM Serif Display',serif;font-size:20px;letter-spacing:-0.02em;line-height:1.15;color:var(--ink)}
+.lesson-nav-link.disabled{opacity:0.5;pointer-events:none}
+
+/* === SIDEBAR TOC === */
+.lesson-sidebar{position:sticky;top:78px;align-self:start;font-family:'Space Grotesk',sans-serif}
+@media(max-width:980px){.lesson-sidebar{position:static}}
+.toc-card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:22px 22px;margin-bottom:18px}
+.toc-card h4{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-muted);font-weight:600;margin:0 0 14px}
+.toc-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0}
+.toc-list li a{display:flex;align-items:flex-start;gap:10px;padding:8px 0;color:var(--ink-soft);text-decoration:none;font-size:14px;line-height:1.4;border-bottom:1px solid oklch(95% 0.012 85);font-weight:500;transition:color .15s}
+.toc-list li:last-child a{border-bottom:none}
+.toc-list li a:hover{color:var(--primary)}
+.toc-list li a.active{color:var(--primary);font-weight:600}
+.toc-list li a .num{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-muted);font-weight:700;letter-spacing:0.06em;flex-shrink:0;width:22px;padding-top:2px}
+.toc-list li a:hover .num{color:var(--primary)}
+
+.sidebar-card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.sidebar-card .l{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-muted);font-weight:600;margin-bottom:6px}
+.sidebar-card .v{font-family:'DM Serif Display',serif;font-size:18px;color:var(--ink);letter-spacing:-0.015em;line-height:1.2}
+.sidebar-card .v.small{font-size:15px}
 </style>
 </head>
 <body>
@@ -71,107 +131,184 @@ section li{margin-bottom:10px;line-height:1.5}
 <nav class="portal-nav">
   <div class="portal-nav-inner">
     <a class="portal-brand" href="../../">
-      <span class="spark"></span>
-      <span class="name"><b>Сила Тока</b><span>академия · персональный портал</span></span>
+      <span class="mark">а</span>
+      <span class="name"><b>Академия Силы Тока</b><span>персональный портал · v1.0</span></span>
     </a>
     <div class="portal-links">
       <a href="../../">Главная</a>
-      <a href="../" class="active">Библиотека встреч</a>
+      <a href="../" class="active">Курс</a>
       <a href="../../setup/">Установка</a>
-      <a href="https://t.me/timzinin" target="_blank">Контакт</a>
     </div>
+    <a href="https://t.me/timzinin" target="_blank" class="portal-cta">Написать куратору</a>
   </div>
 </nav>
 
 <div class="wrap">
 
+<div class="lesson-layout">
+
+<main class="lesson-content">
+
 <header class="lesson-head">
   <div class="crumbs">
     <a href="../../">Академия</a>
     <span class="sep">/</span>
-    <a href="../">Библиотека</a>
+    <a href="../">Foundations</a>
     <span class="sep">/</span>
-    <span>30 апреля 2026</span>
+    <span>Урок 02</span>
   </div>
-  <span class="eyebrow">занятие 01 · 30 апреля 2026</span>
-  <h1>Настройка <em>Codex</em> в CLI-версии</h1>
-  <p class="lede">Первая встреча. Поставили Node, Codex CLI и голосовой ввод Handy. Разобрали что такое скилл, агент, MCP — и зачем они нужны на практике. В конце прошли цепочку: запрос → поиск → обработка → готовая страница в интернете.</p>
-  <div class="lesson-meta">
-    <div><b>Дата</b> 30 апреля 2026</div>
-    <div><b>Платформа</b> Zoom</div>
-    <div><b>Участники</b> Род · Дмитрий · Тимофей</div>
-    <div><b>Темы</b> Codex CLI · Handy · Скиллы · MCP</div>
+  <div class="lesson-meta-row">
+    <span class="tag tag--accent">Урок 02</span>
+    <span class="tag tag--video">запись Zoom</span>
+    <span class="tag">30 апреля 2026</span>
+    <span class="tag">~1 ч 06 мин</span>
   </div>
+  <h1>Настройка <em>Codex CLI</em><br>и работа с&nbsp;ним</h1>
+  <p class="lede">Первое живое занятие. Поставили Codex и Handy на работающий мак. Разобрали что такое скилл, агент, MCP. Прошли цепочку «запрос → поиск → обработка → готовая страница в&nbsp;интернете».</p>
 </header>
 
-<a class="video-card" href="https://us06web.zoom.us/rec/share/YFyUQo37yKKX1Ncdyjnld2ZzjHgEaay9U_e4XruDfNxGS3nNaYQ_l3-r-asrDVV2.AO-Nrzx5PCyq5Jxa" target="_blank" style="text-decoration:none;color:inherit">
-  <div class="video-poster">
-    <span class="poster-tag">● запись · zoom</span>
+<a class="video-card" href="https://us06web.zoom.us/rec/share/YFyUQo37yKKX1Ncdyjnld2ZzjHgEaay9U_e4XruDfNxGS3nNaYQ_l3-r-asrDVV2.AO-Nrzx5PCyq5Jxa" target="_blank">
+  <div class="video-cover">
+    <img src="img/zoom-preview.png" alt="Кадр из записи занятия — момент регистрации в GitHub" loading="lazy">
+    <span class="video-tag"><span class="pulse"></span>запись · zoom</span>
+    <span class="video-duration">1:06:29</span>
     <span class="play-btn" aria-label="Открыть запись"></span>
-    <span class="poster-duration">смотреть запись</span>
   </div>
   <div class="video-info">
-    <span class="platform">zoom recording</span>
-    <h3>Занятие 01 — настройка Codex CLI</h3>
-    <p style="color:oklch(80% 0.04 85);font-size:14px;margin:0">Запись хранится на серверах Zoom. Для просмотра потребуется код доступа — он указан ниже.</p>
-    <div class="pass">
-      <span class="pass-label">код доступа</span>
-      <span class="pass-code"><span id="passcode">d0LC2=B@</span><button onclick="event.preventDefault();event.stopPropagation();navigator.clipboard.writeText('d0LC2=B@').then(()=>{this.textContent='скопировано';setTimeout(()=>this.textContent='copy',1500)})">copy</button></span>
+    <div>
+      <div class="platform">zoom recording</div>
+      <h3>Tim Zinin's Zoom Meeting · 30 апреля 2026</h3>
+      <div class="pass-mini">
+        <span>код доступа:</span>
+        <code id="passcode">d0LC2=B@</code>
+        <button onclick="event.preventDefault();event.stopPropagation();navigator.clipboard.writeText('d0LC2=B@').then(()=>{this.textContent='скопировано';setTimeout(()=>this.textContent='copy',1500)})">copy</button>
+      </div>
     </div>
-    <span class="open-link">Открыть запись на Zoom</span>
+    <span class="open-btn">Открыть запись</span>
   </div>
 </a>
 
-<section>
-  <h2>Что мы прошли на занятии</h2>
-  <p>Полный путь от пустого терминала до публикации артефакта в интернете. Сегодня — основа, на которой будет строиться всё дальше.</p>
-  <div class="toc">
-    <div class="toc-item"><span class="t">блок 01</span><span class="n">Установка Codex CLI</span></div>
-    <div class="toc-item"><span class="t">блок 02</span><span class="n">Логин в ChatGPT Business</span></div>
-    <div class="toc-item"><span class="t">блок 03</span><span class="n">Голосовой ввод через Handy</span></div>
-    <div class="toc-item"><span class="t">блок 04</span><span class="n">Что такое скилл, агент, MCP</span></div>
-    <div class="toc-item"><span class="t">блок 05</span><span class="n">Создание первого скилла</span></div>
-    <div class="toc-item"><span class="t">блок 06</span><span class="n">Публикация артефакта на GitHub</span></div>
+<section class="block" id="content">
+  <h2>Что мы <em>прошли</em></h2>
+  <p class="block-lede">Полный путь от пустого терминала до публикации артефакта в интернете. Сегодня — основа, на которой будет строиться всё дальше.</p>
+  <div class="outline">
+    <div class="outline-item"><span class="num">01</span><span class="name">Установка Codex CLI</span></div>
+    <div class="outline-item"><span class="num">02</span><span class="name">Логин в ChatGPT Business</span></div>
+    <div class="outline-item"><span class="num">03</span><span class="name">Голосовой ввод через Handy</span></div>
+    <div class="outline-item"><span class="num">04</span><span class="name">Что такое скилл, агент, MCP</span></div>
+    <div class="outline-item"><span class="num">05</span><span class="name">Создание первого скилла</span></div>
+    <div class="outline-item"><span class="num">06</span><span class="name">Публикация на GitHub Pages</span></div>
   </div>
 </section>
 
-<section>
+<section class="block" id="takeaways">
   <h2>Главные <em>выводы</em></h2>
-  <ul>
-    <li><b>Codex — это не чат.</b> Это агент, который живёт у вас на компьютере, видит ваши файлы и делает реальные действия от вашего имени.</li>
-    <li><b>Скилл</b> — переиспользуемая инструкция: один раз описали словами, дальше вызываете командой <code>$имя-скилла</code>.</li>
-    <li><b>MCP</b> — мост между Codex и внешним миром: доступ к файлам, поиску, GitHub, браузеру. Подключается через конфиг.</li>
-    <li><b>Workspace ChatGPT Business</b> — единая команда. Род — admin, Дмитрий — member. У каждого свой логин и свои квоты Codex.</li>
-    <li><b>Голосовой ввод</b> экономит силы. Длинные промпты намного быстрее наговорить, чем напечатать. Handy локальный — данные не уходят в облако.</li>
-  </ul>
-</section>
-
-<section>
-  <h2>Материалы и ссылки</h2>
-  <ul>
-    <li><a href="../../setup/">Полная инструкция по установке</a> — Mac (Род) и Windows (Дмитрий)</li>
-    <li><a href="https://handy.computer" target="_blank">handy.computer</a> — голосовой ввод</li>
-    <li><a href="https://developers.openai.com/codex" target="_blank">developers.openai.com/codex</a> — официальная документация Codex</li>
-    <li><a href="https://developers.openai.com/codex/skills" target="_blank">developers.openai.com/codex/skills</a> — про скиллы подробно</li>
-  </ul>
-</section>
-
-<div class="next-card">
-  <span class="small">домашнее задание · до следующей встречи</span>
-  <h3>Попробовать создать <em>свой первый скилл</em></h3>
-  <p style="margin:0;color:var(--ink-soft)">В терминале запустить <code>codex</code> → ввести <code>$skill-creator</code> → пройти диалог. Скилл может быть любым — например, «собери HTML-страницу про X и опубликуй на GitHub Pages». Если что-то идёт не так — скриншот в Telegram, разберёмся.</p>
-  <div class="actions">
-    <a href="../../setup/">Открыть инструкцию по установке</a>
-    <a href="https://t.me/timzinin" target="_blank">Написать в Telegram</a>
+  <p class="block-lede">Если унесёте только эти пять мыслей с занятия — этого уже достаточно, чтобы начать работать дальше самостоятельно.</p>
+  <div class="takeaways">
+    <div class="takeaway"><span class="marker">①</span><div class="body"><p><b>Codex — это не чат.</b> Это агент, который живёт у вас на компьютере, видит ваши файлы и делает реальные действия от вашего имени.</p></div></div>
+    <div class="takeaway"><span class="marker">②</span><div class="body"><p><b>Скилл</b> — переиспользуемая инструкция: один раз описали словами, дальше вызываете командой <code>$имя-скилла</code>.</p></div></div>
+    <div class="takeaway"><span class="marker">③</span><div class="body"><p><b>MCP</b> — мост между Codex и внешним миром: доступ к файлам, поиску, GitHub, браузеру. Подключается через конфиг.</p></div></div>
+    <div class="takeaway"><span class="marker">④</span><div class="body"><p><b>Workspace ChatGPT Business</b> — единая команда. Род — admin, Дмитрий — member. У каждого свой логин и свои квоты Codex.</p></div></div>
+    <div class="takeaway"><span class="marker">⑤</span><div class="body"><p><b>Голосовой ввод</b> экономит силы. Длинные промпты быстрее наговорить, чем напечатать. Handy локальный — данные не уходят в облако.</p></div></div>
   </div>
+</section>
+
+<section class="block" id="materials">
+  <h2>Материалы <em>и ссылки</em></h2>
+  <p class="block-lede">Документация и инструменты, к которым возвращаемся.</p>
+  <div class="materials">
+    <a class="material" href="../../setup/">
+      <span class="lbl">урок 01</span>
+      <span class="ttl">Подготовка к занятию: установка</span>
+      <span class="url">/setup/ — Mac и Windows</span>
+    </a>
+    <a class="material" href="https://handy.computer" target="_blank">
+      <span class="lbl">инструмент</span>
+      <span class="ttl">Handy — голосовой ввод</span>
+      <span class="url">handy.computer</span>
+    </a>
+    <a class="material" href="https://developers.openai.com/codex" target="_blank">
+      <span class="lbl">документация</span>
+      <span class="ttl">Codex — обзор и фичи</span>
+      <span class="url">developers.openai.com/codex</span>
+    </a>
+    <a class="material" href="https://developers.openai.com/codex/skills" target="_blank">
+      <span class="lbl">документация</span>
+      <span class="ttl">Скиллы — создание и вызов</span>
+      <span class="url">developers.openai.com/codex/skills</span>
+    </a>
+  </div>
+</section>
+
+<section class="block" id="homework">
+  <h2>Домашнее <em>задание</em></h2>
+  <p class="block-lede">Маленькое практическое упражнение чтобы закрепить руками. На следующее занятие можно прийти и без него, но с ним будет интереснее.</p>
+  <div class="homework">
+    <span class="small">до следующей встречи</span>
+    <h3>Создать <em>свой первый скилл</em></h3>
+    <p>В терминале запустите <code>codex</code> → введите <code>$skill-creator</code> → пройдите диалог. Скилл может быть любым — например, «собери HTML-страницу про X и опубликуй на GitHub Pages». Если что-то идёт не так — скриншот в Telegram.</p>
+    <div class="actions">
+      <a href="../../setup/" class="btn-primary">Открыть установку</a>
+      <a href="https://t.me/timzinin" target="_blank" class="btn-ghost">Написать в Telegram</a>
+    </div>
+  </div>
+</section>
+
+<nav class="lesson-nav">
+  <a class="lesson-nav-link prev" href="../../setup/">
+    <span class="l">← предыдущий урок</span>
+    <span class="name">01 · Подготовка к занятию</span>
+  </a>
+  <span class="lesson-nav-link next disabled">
+    <span class="l">следующий урок →</span>
+    <span class="name">скоро</span>
+  </span>
+</nav>
+
+</main>
+
+<aside class="lesson-sidebar">
+
+  <div class="toc-card">
+    <h4>Содержание урока</h4>
+    <ul class="toc-list">
+      <li><a href="#content"><span class="num">01</span>Что прошли</a></li>
+      <li><a href="#takeaways"><span class="num">02</span>Главные выводы</a></li>
+      <li><a href="#materials"><span class="num">03</span>Материалы</a></li>
+      <li><a href="#homework"><span class="num">04</span>Домашнее задание</a></li>
+    </ul>
+  </div>
+
+  <div class="sidebar-card">
+    <div class="l">формат</div>
+    <div class="v">Запись Zoom + конспект</div>
+  </div>
+  <div class="sidebar-card">
+    <div class="l">длительность</div>
+    <div class="v">1 ч 06 мин</div>
+  </div>
+  <div class="sidebar-card">
+    <div class="l">участники</div>
+    <div class="v small">Род · Дмитрий · Тимофей</div>
+  </div>
+
+</aside>
+
 </div>
 
 </div>
 
 <footer class="portal-footer">
   <div class="inner">
-    <span>Сила Тока · Академия · занятие 01 · 30 апреля 2026</span>
-    <span><a href="../../">← на главную</a></span>
+    <div>
+      <div class="brand">Академия Силы Тока</div>
+      <div class="meta">урок 02 · 30 апреля 2026</div>
+    </div>
+    <div class="links">
+      <a href="../">Курс</a>
+      <a href="../../">Главная</a>
+      <a href="https://t.me/timzinin" target="_blank">@timzinin</a>
+    </div>
   </div>
 </footer>
 

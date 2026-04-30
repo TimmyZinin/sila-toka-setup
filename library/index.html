@@ -3,37 +3,62 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Библиотека встреч · Сила Тока · Академия</title>
-<meta name="description" content="Записи и материалы всех занятий для Рода и Дмитрия. Запись каждой встречи на Zoom + конспект + ссылки.">
+<title>Foundations — AI-агенты в работе · Академия Силы Тока</title>
+<meta name="description" content="Курс Foundations: AI-агенты в работе. Установка инструментов, основы Codex CLI, скиллы и MCP, end-to-end pipeline.">
 <link rel="canonical" href="https://timzinin.com/sila-toka-setup/library/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../_portal.css">
 <style>
-.head{padding:clamp(50px,7vw,100px) 0 clamp(30px,4vw,60px)}
-.head h1{font-size:clamp(46px,8vw,108px);max-width:14ch;margin-bottom:18px}
-.head h1 em{font-style:italic;color:var(--bordeaux)}
-.head .lede{font-size:clamp(17px,1.5vw,21px);max-width:60ch;color:var(--ink-soft);margin:0}
+.course-head{padding:clamp(40px,6vw,80px) 0 clamp(30px,4vw,50px)}
+.course-head .meta-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:clamp(30px,5vw,80px);align-items:start;margin-top:30px}
+@media(max-width:880px){.course-head .meta-grid{grid-template-columns:1fr;gap:24px}}
+.course-head h1{font-family:'DM Serif Display',serif;font-size:clamp(42px,6.5vw,76px);line-height:1;letter-spacing:-0.035em;margin:14px 0 22px;max-width:14ch}
+.course-head h1 em{font-style:italic;color:var(--primary)}
+.course-head .summary{font-size:clamp(17px,1.5vw,20px);line-height:1.55;color:var(--ink-soft);margin:0;max-width:62ch}
+.course-stats{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:22px 24px;display:flex;flex-direction:column;gap:14px}
+.course-stats .row{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:1px solid var(--line);font-family:'Space Grotesk',sans-serif}
+.course-stats .row:last-child{border-bottom:none;padding-bottom:0}
+.course-stats .row .l{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-muted);font-weight:600}
+.course-stats .row .v{font-family:'DM Serif Display',serif;font-size:18px;letter-spacing:-0.015em;color:var(--ink)}
 
-.lessons{display:flex;flex-direction:column;gap:0;border-top:2.5px solid var(--line);margin-bottom:60px}
-.lesson{display:grid;grid-template-columns:120px 1fr auto;gap:clamp(20px,3vw,40px);padding:28px clamp(16px,3vw,32px);border-bottom:2.5px solid var(--line);background:var(--cream);text-decoration:none;color:var(--ink);transition:background .15s,transform .1s;align-items:center}
-.lesson:hover{background:var(--peach)}
-@media(max-width:680px){.lesson{grid-template-columns:1fr;gap:10px;padding:22px}}
-.lesson .date{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:0.06em;color:var(--bordeaux);font-weight:600;text-transform:uppercase;line-height:1.3}
-.lesson .date b{display:block;font-family:'DM Serif Display',serif;font-size:38px;color:var(--ink);font-weight:400;letter-spacing:-0.02em;line-height:1}
-.lesson .info h2{font-family:'DM Serif Display',serif;font-size:clamp(24px,2.6vw,34px);margin:0 0 6px;line-height:1.1;letter-spacing:-0.01em}
-.lesson .info h2 em{font-style:italic;color:var(--bordeaux)}
-.lesson .info .desc{color:var(--ink-soft);font-size:15px;line-height:1.5;margin:0 0 8px;max-width:60ch}
-.lesson .info .tags{display:flex;flex-wrap:wrap;gap:6px}
-.lesson .info .tags span{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;background:var(--bg-2);padding:3px 8px;color:var(--ink-soft)}
-.lesson .arrow{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--bordeaux);display:flex;align-items:center;gap:8px;white-space:nowrap}
-.lesson .arrow::after{content:"→";font-size:18px;transition:transform .15s}
-.lesson:hover .arrow::after{transform:translateX(6px)}
-@media(max-width:680px){.lesson .arrow{justify-content:flex-start}}
+.lessons-section{padding:clamp(20px,3vw,40px) 0 clamp(60px,7vw,100px)}
+.lessons-section .section-head{margin-bottom:24px;display:flex;justify-content:space-between;align-items:end;flex-wrap:wrap;gap:14px}
+.lessons-section h2{font-family:'DM Serif Display',serif;font-size:clamp(28px,3.5vw,42px);letter-spacing:-0.025em;line-height:1.05;margin:0}
+.lessons-section h2 em{font-style:italic;color:var(--primary)}
+.lessons-section .progress-info{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.1em;color:var(--ink-muted);text-transform:uppercase;font-weight:600}
+.lessons-section .progress-info b{color:var(--primary)}
 
-.upcoming{background:var(--bg-2);border:2px dashed var(--line);padding:30px clamp(20px,3vw,32px);text-align:center;color:var(--ink-soft);font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:0.06em;text-transform:uppercase}
-.upcoming b{color:var(--bordeaux);display:block;font-family:'DM Serif Display',serif;font-size:24px;text-transform:none;letter-spacing:-0.01em;margin-bottom:6px;font-weight:400}
+.lessons{display:flex;flex-direction:column;gap:14px}
+.lesson{display:grid;grid-template-columns:auto 1fr auto;gap:clamp(20px,3vw,32px);padding:clamp(20px,2.5vw,28px) clamp(20px,2.5vw,30px);background:var(--paper);border:1px solid var(--line);border-radius:12px;text-decoration:none;color:var(--ink);transition:border-color .2s,transform .15s,box-shadow .2s;align-items:center}
+.lesson:hover{border-color:var(--primary);transform:translateY(-1px);box-shadow:0 8px 28px -16px oklch(20% 0.04 30 / 0.15)}
+@media(max-width:780px){.lesson{grid-template-columns:1fr;gap:14px;padding:22px}}
+
+.lesson-num{display:flex;flex-direction:column;align-items:center;justify-content:center;width:84px;height:84px;background:var(--soft);border-radius:12px;flex-shrink:0;line-height:1}
+.lesson-num .l{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-muted);font-weight:700;margin-bottom:5px}
+.lesson-num .n{font-family:'DM Serif Display',serif;font-size:42px;color:var(--primary);letter-spacing:-0.04em;font-weight:400}
+.lesson--current .lesson-num{background:var(--primary)}
+.lesson--current .lesson-num .l{color:oklch(85% 0.06 80)}
+.lesson--current .lesson-num .n{color:var(--soft)}
+
+.lesson-info{display:flex;flex-direction:column;gap:6px}
+.lesson-tag-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:2px}
+.lesson-tag{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-muted);font-weight:600;padding:3px 9px;background:var(--soft);border-radius:4px}
+.lesson-tag--video{background:oklch(94% 0.05 130);color:oklch(40% 0.12 140)}
+.lesson-tag--text{background:oklch(94% 0.04 240);color:oklch(40% 0.12 240)}
+.lesson-info h3{font-family:'DM Serif Display',serif;font-size:clamp(22px,2.5vw,30px);letter-spacing:-0.025em;line-height:1.15;margin:0;max-width:24ch}
+.lesson-info h3 em{font-style:italic;color:var(--primary)}
+.lesson-info .desc{font-size:14.5px;line-height:1.55;color:var(--ink-soft);margin:0;max-width:62ch}
+
+.lesson-cta{font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;color:var(--primary);display:inline-flex;align-items:center;gap:8px;letter-spacing:-0.005em;white-space:nowrap;flex-shrink:0}
+.lesson-cta::after{content:"→";font-size:18px;transition:transform .15s}
+.lesson:hover .lesson-cta::after{transform:translateX(4px)}
+
+.next-up{margin-top:30px;padding:24px 26px;background:var(--bg-2);border:1px dashed var(--line);border-radius:12px;display:flex;align-items:center;gap:18px;color:var(--ink-soft)}
+.next-up .badge{width:50px;height:50px;background:var(--bg);border:1.5px solid var(--line);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--ink-muted);font-family:'DM Serif Display',serif;font-size:24px;flex-shrink:0}
+.next-up .text strong{display:block;font-family:'DM Serif Display',serif;font-size:20px;color:var(--ink);font-weight:400;letter-spacing:-0.015em;margin-bottom:3px}
+.next-up .text span{font-family:'Space Grotesk',sans-serif;font-size:14px}
 </style>
 </head>
 <body>
@@ -41,57 +66,99 @@
 <nav class="portal-nav">
   <div class="portal-nav-inner">
     <a class="portal-brand" href="../">
-      <span class="spark"></span>
-      <span class="name"><b>Сила Тока</b><span>академия · персональный портал</span></span>
+      <span class="mark">а</span>
+      <span class="name"><b>Академия Силы Тока</b><span>персональный портал · v1.0</span></span>
     </a>
     <div class="portal-links">
       <a href="../">Главная</a>
-      <a href="./" class="active">Библиотека встреч</a>
+      <a href="./" class="active">Курс</a>
       <a href="../setup/">Установка</a>
-      <a href="https://t.me/timzinin" target="_blank">Контакт</a>
     </div>
+    <a href="https://t.me/timzinin" target="_blank" class="portal-cta">Написать куратору</a>
   </div>
 </nav>
 
 <div class="wrap">
 
-<header class="head">
-  <span class="eyebrow">архив занятий · обновляется</span>
-  <h1>Библиотека <em>встреч</em></h1>
-  <p class="lede">Все наши занятия с записями на Zoom, конспектами и ссылками на материалы. Возвращайтесь сюда чтобы повторить, посмотреть запись или скопировать команду.</p>
+<header class="course-head">
+  <div class="crumbs">
+    <a href="../">Академия</a>
+    <span class="sep">/</span>
+    <span>Курс</span>
+  </div>
+  <span class="eyebrow">программа · базовый уровень</span>
+  <h1>Foundations:<br><em>AI-агенты</em> в работе</h1>
+  <div class="meta-grid">
+    <p class="summary">Шаг за шагом разбираемся, как устроены AI-агенты, скиллы и MCP — и как ими пользоваться руками, в собственном терминале, на собственных задачах. Каждое занятие — новый урок здесь, с записью на Zoom и конспектом.</p>
+    <div class="course-stats">
+      <div class="row"><span class="l">учеников</span><span class="v">2</span></div>
+      <div class="row"><span class="l">уроков</span><span class="v">2 · больше впереди</span></div>
+      <div class="row"><span class="l">старт</span><span class="v">30 апреля 2026</span></div>
+      <div class="row"><span class="l">формат</span><span class="v">Zoom + текст</span></div>
+    </div>
+  </div>
 </header>
 
-<div class="lessons">
+<section class="lessons-section">
+  <div class="section-head">
+    <h2>Уроки <em>курса</em></h2>
+    <span class="progress-info">пройдено: <b>2 из 2</b> доступных</span>
+  </div>
 
-  <a class="lesson" href="2026-04-30/">
-    <div class="date">апр<b>30</b>2026</div>
-    <div class="info">
-      <h2>Настройка <em>Codex</em> в CLI-версии</h2>
-      <p class="desc">Поставили Node, Codex, Handy. Разобрали скиллы, агенты, MCP. Прошли цепочку «запрос → готовая страница в интернете».</p>
-      <div class="tags">
-        <span>Codex CLI</span>
-        <span>Handy</span>
-        <span>Скиллы</span>
-        <span>MCP</span>
-        <span>GitHub Pages</span>
+  <div class="lessons">
+
+    <a class="lesson" href="../setup/">
+      <div class="lesson-num"><span class="l">урок</span><span class="n">01</span></div>
+      <div class="lesson-info">
+        <div class="lesson-tag-row">
+          <span class="lesson-tag lesson-tag--text">текстовый</span>
+          <span class="lesson-tag">подготовка к занятию</span>
+          <span class="lesson-tag">15–20 мин</span>
+        </div>
+        <h3>Подготовка <em>к первому занятию</em></h3>
+        <p class="desc">Самостоятельная установка инструментов: Node.js, Codex CLI, голосовой ввод Handy. Пошаговая инструкция отдельно для Mac (Род) и Windows (Дмитрий).</p>
       </div>
+      <span class="lesson-cta">Открыть</span>
+    </a>
+
+    <a class="lesson lesson--current" href="2026-04-30/">
+      <div class="lesson-num"><span class="l">урок</span><span class="n">02</span></div>
+      <div class="lesson-info">
+        <div class="lesson-tag-row">
+          <span class="lesson-tag lesson-tag--video">запись Zoom</span>
+          <span class="lesson-tag">30 апреля 2026</span>
+          <span class="lesson-tag">~1 ч 06 мин</span>
+        </div>
+        <h3>Настройка <em>Codex CLI</em> и работа с&nbsp;ним</h3>
+        <p class="desc">Первое живое занятие. Поставили Codex и Handy на работающий мак. Разобрали что такое скилл, агент, MCP. Прошли цепочку «запрос → готовая страница в интернете».</p>
+      </div>
+      <span class="lesson-cta">Открыть</span>
+    </a>
+
+  </div>
+
+  <div class="next-up">
+    <div class="badge">→</div>
+    <div class="text">
+      <strong>Следующий урок появится здесь сразу после встречи</strong>
+      <span>Записи Zoom, конспекты и материалы — всё накапливается в одной программе</span>
     </div>
-    <div class="arrow">Открыть</div>
-  </a>
-
-</div>
-
-<div class="upcoming">
-  <b>Следующее занятие — скоро</b>
-  Запись и конспект появятся здесь сразу после встречи
-</div>
+  </div>
+</section>
 
 </div>
 
 <footer class="portal-footer">
   <div class="inner">
-    <span>Сила Тока · Академия · библиотека встреч</span>
-    <span><a href="../">← на главную</a></span>
+    <div>
+      <div class="brand">Академия Силы Тока</div>
+      <div class="meta">персональный портал · с 30 апреля 2026</div>
+    </div>
+    <div class="links">
+      <a href="../">Главная</a>
+      <a href="../setup/">Установка</a>
+      <a href="https://t.me/timzinin" target="_blank">@timzinin</a>
+    </div>
   </div>
 </footer>
 

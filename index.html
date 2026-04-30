@@ -3,60 +3,79 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Сила Тока · Академия — персональный портал Рода и Дмитрия</title>
-<meta name="description" content="Образовательный портал «Сила Тока · Академия». Установка инструментов, библиотека встреч, материалы и контакты для Рода Шайхутдинова и Дмитрия Харламова.">
+<title>Академия Силы Тока — персональный портал обучения</title>
+<meta name="description" content="Персональная академия для Рода Шайхутдинова и Дмитрия Харламова. Курсы, записи занятий, материалы, инструкции по установке.">
 <link rel="canonical" href="https://timzinin.com/sila-toka-setup/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="_portal.css">
 <style>
-.hero{padding:clamp(60px,9vw,130px) 0 clamp(40px,6vw,90px);position:relative}
-.hero h1{font-size:clamp(54px,9vw,128px);max-width:14ch;margin-bottom:22px}
-.hero h1 em{font-style:italic;color:var(--bordeaux)}
-.hero .lede{font-size:clamp(18px,1.8vw,23px);max-width:60ch;color:var(--ink-soft);margin:0 0 30px}
-.hero .meta{display:flex;flex-wrap:wrap;gap:18px 36px;font-family:'JetBrains Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.08em}
-.hero .meta b{color:var(--bordeaux);display:block;font-size:11px;font-weight:600;letter-spacing:0.12em;margin-bottom:3px}
-.hero-geom{position:absolute;right:clamp(16px,4vw,60px);top:clamp(70px,10vw,130px);width:clamp(160px,22vw,300px);pointer-events:none;opacity:0.55;z-index:-1}
+.hero{padding:clamp(60px,9vw,120px) 0 clamp(50px,7vw,90px);position:relative}
+.hero-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:clamp(40px,6vw,90px);align-items:end}
+@media(max-width:880px){.hero-grid{grid-template-columns:1fr;gap:32px}}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(46px,7vw,84px);line-height:1;letter-spacing:-0.035em;margin:14px 0 24px;max-width:14ch}
+.hero h1 em{font-style:italic;color:var(--primary)}
+.hero .lede{font-size:clamp(17px,1.5vw,20px);line-height:1.5;color:var(--ink-soft);margin:0 0 30px;max-width:54ch}
+.hero .actions{display:flex;flex-wrap:wrap;gap:12px}
+.hero-side{display:flex;flex-direction:column;gap:16px;font-family:'Space Grotesk',sans-serif;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:24px 26px}
+.hero-side .row{display:flex;flex-direction:column;gap:3px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.hero-side .row:last-child{border-bottom:none;padding-bottom:0}
+.hero-side .row .l{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-muted);font-weight:600}
+.hero-side .row .v{font-family:'DM Serif Display',serif;font-size:21px;letter-spacing:-0.015em;color:var(--ink);line-height:1.15}
 
-section{padding:clamp(50px,7vw,100px) 0;border-bottom:1.5px solid var(--line)}
-h2.sec-title{font-size:clamp(36px,6vw,72px);margin-bottom:14px;max-width:22ch}
-h2.sec-title em{color:var(--bordeaux);font-style:italic}
-.sec-lede{font-size:clamp(16px,1.4vw,18px);max-width:60ch;color:var(--ink-soft);margin:0 0 36px}
+/* COURSE — featured big card */
+.course-section{padding:clamp(40px,5vw,70px) 0 clamp(60px,7vw,100px)}
+.section-head{margin-bottom:36px}
+.section-head h2{font-family:'DM Serif Display',serif;font-size:clamp(32px,4vw,52px);line-height:1.05;letter-spacing:-0.03em;margin-top:14px;max-width:22ch}
+.section-head h2 em{font-style:italic;color:var(--primary)}
+.section-head .desc{font-size:16px;line-height:1.55;color:var(--ink-soft);max-width:60ch;margin:14px 0 0}
 
-.module-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:0;border-top:2.5px solid var(--line);border-left:2.5px solid var(--line);box-shadow:8px 8px 0 var(--line);background:var(--cream)}
-.module{display:flex;flex-direction:column;gap:14px;padding:32px clamp(22px,3vw,32px);border-right:2.5px solid var(--line);border-bottom:2.5px solid var(--line);background:var(--cream);min-height:280px;text-decoration:none;color:var(--ink);position:relative;transition:background .15s,transform .15s}
-.module:hover{background:var(--peach)}
-.module .num{font-family:'DM Serif Display',serif;font-size:62px;line-height:0.9;color:var(--bordeaux);opacity:0.85}
-.module .tag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--bordeaux);font-weight:600}
-.module h3{font-family:'DM Serif Display',serif;font-size:clamp(26px,2.4vw,34px);margin:0;color:var(--ink);letter-spacing:-0.015em}
-.module h3 em{font-style:italic;color:var(--bordeaux)}
-.module .desc{font-size:15px;line-height:1.45;color:var(--ink-soft);margin:0 0 auto;max-width:32ch}
-.module .arrow{margin-top:auto;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--bordeaux);display:flex;align-items:center;gap:8px}
-.module .arrow::after{content:"→";font-size:18px;transition:transform .15s}
-.module:hover .arrow::after{transform:translateX(6px)}
-.module.featured{background:var(--bordeaux);color:var(--cream)}
-.module.featured h3,.module.featured h3 em{color:var(--cream)}
-.module.featured .num{color:var(--ochre);opacity:0.95}
-.module.featured .tag{color:var(--ochre)}
-.module.featured .desc{color:oklch(88% 0.04 85)}
-.module.featured .arrow{color:var(--ochre)}
-.module.featured:hover{background:oklch(38% 0.15 25)}
+.course{display:grid;grid-template-columns:1.4fr 1fr;gap:0;background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden;text-decoration:none;color:var(--ink);transition:border-color .2s,transform .15s,box-shadow .2s}
+.course:hover{border-color:var(--primary);transform:translateY(-2px);box-shadow:0 12px 40px -16px oklch(20% 0.04 30 / 0.18)}
+@media(max-width:880px){.course{grid-template-columns:1fr}}
+.course-cover{background:linear-gradient(135deg, var(--primary) 0%, var(--secondary) 65%, var(--accent) 110%);padding:clamp(36px,5vw,52px);min-height:340px;display:flex;flex-direction:column;justify-content:space-between;color:var(--soft);position:relative;overflow:hidden}
+.course-cover::before{content:"";position:absolute;top:-30%;right:-20%;width:65%;height:140%;background:oklch(98% 0.012 85 / 0.1);border-radius:50%}
+.course-cover::after{content:"";position:absolute;bottom:-40%;left:-10%;width:50%;height:120%;background:oklch(0% 0 0 / 0.12);border-radius:50%}
+.course-cover>*{position:relative;z-index:2}
+.course-cover .tag{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--soft);font-weight:600;display:inline-flex;align-items:center;gap:9px;padding:6px 11px;border:1px solid oklch(98% 0.012 85 / 0.4);border-radius:4px;align-self:flex-start;background:oklch(0% 0 0 / 0.16)}
+.course-cover .num{font-family:'DM Serif Display',serif;font-size:clamp(70px,8vw,108px);line-height:0.85;letter-spacing:-0.04em;color:var(--soft);opacity:0.95;margin-top:14px}
+.course-cover h3{font-family:'DM Serif Display',serif;font-size:clamp(28px,3.5vw,44px);line-height:1;letter-spacing:-0.025em;color:var(--soft);margin:14px 0 0;max-width:14ch}
+.course-cover h3 em{font-style:italic;color:var(--accent)}
 
-.about{display:grid;grid-template-columns:1fr 1.4fr;gap:clamp(40px,6vw,90px);align-items:start}
-@media(max-width:780px){.about{grid-template-columns:1fr;gap:30px}}
-.about .label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--bordeaux);font-weight:600}
-.about p{font-size:17px;line-height:1.6;color:var(--ink);margin:0 0 16px}
-.about p b{color:var(--ink)}
+.course-body{padding:clamp(28px,4vw,40px);display:flex;flex-direction:column;gap:18px;background:var(--paper)}
+.course-body .lvl{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--primary);font-weight:600}
+.course-body .summary{font-size:15.5px;line-height:1.6;color:var(--ink-soft);margin:0;max-width:38ch}
+.course-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:8px}
+.course-stats .stat .l{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-muted);font-weight:600;margin-bottom:4px}
+.course-stats .stat .v{font-family:'DM Serif Display',serif;font-size:22px;letter-spacing:-0.02em;color:var(--ink);line-height:1.1}
+.course-cta{display:inline-flex;align-items:center;justify-content:space-between;gap:10px;color:var(--primary);font-family:'Space Grotesk',sans-serif;font-size:14.5px;font-weight:600;letter-spacing:-0.005em;margin-top:auto}
+.course-cta::after{content:"→";font-size:20px;transition:transform .15s}
+.course:hover .course-cta::after{transform:translateX(6px)}
 
-.contact-block{background:var(--cream);border:2.5px solid var(--line);box-shadow:6px 6px 0 var(--line);padding:34px clamp(24px,4vw,40px);display:grid;grid-template-columns:auto 1fr;gap:26px;align-items:center;margin-top:20px}
-@media(max-width:680px){.contact-block{grid-template-columns:1fr;gap:14px}}
-.contact-block .avatar{width:90px;height:90px;border-radius:50%;background:var(--ochre);border:3px solid var(--line);display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:42px;color:var(--ink);line-height:1}
-.contact-block h3{font-family:'DM Serif Display',serif;font-size:32px;margin:0 0 4px;letter-spacing:-0.01em}
-.contact-block .role{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:14px}
-.contact-block .channels{display:flex;flex-wrap:wrap;gap:8px}
-.contact-block .channels a{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.04em;font-weight:600;text-transform:uppercase;padding:8px 14px;border:1.5px solid var(--bordeaux);color:var(--bordeaux);text-decoration:none;background:var(--bg);transition:background .15s,color .15s}
-.contact-block .channels a:hover{background:var(--bordeaux);color:var(--cream)}
+/* SECONDARY GRID — Setup + Contact */
+.secondary{padding:clamp(50px,6vw,90px) 0;border-top:1px solid var(--line)}
+.secondary-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:760px){.secondary-grid{grid-template-columns:1fr}}
+.tile{display:flex;flex-direction:column;gap:14px;padding:clamp(28px,3.5vw,40px);background:var(--paper);border:1px solid var(--line);border-radius:12px;text-decoration:none;color:var(--ink);transition:border-color .2s,transform .15s,box-shadow .2s;min-height:240px}
+.tile:hover{border-color:var(--primary);transform:translateY(-2px);box-shadow:0 10px 30px -16px oklch(20% 0.04 30 / 0.18)}
+.tile .icon{width:46px;height:46px;background:var(--soft);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--primary);font-family:'DM Serif Display',serif;font-size:24px;line-height:1}
+.tile h3{font-family:'DM Serif Display',serif;font-size:clamp(22px,2.5vw,30px);letter-spacing:-0.02em;line-height:1.1;margin:6px 0 0}
+.tile h3 em{font-style:italic;color:var(--primary)}
+.tile p{margin:0;font-size:15px;line-height:1.55;color:var(--ink-soft);max-width:38ch}
+.tile .arrow{margin-top:auto;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;color:var(--primary);display:inline-flex;align-items:center;gap:8px;letter-spacing:-0.005em}
+.tile .arrow::after{content:"→";font-size:18px;transition:transform .15s}
+.tile:hover .arrow::after{transform:translateX(4px)}
+
+/* ABOUT */
+.about{padding:clamp(50px,7vw,100px) 0;border-top:1px solid var(--line)}
+.about-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:clamp(30px,5vw,80px)}
+@media(max-width:780px){.about-grid{grid-template-columns:1fr;gap:28px}}
+.about-grid h2{font-family:'DM Serif Display',serif;font-size:clamp(32px,4.5vw,56px);line-height:1.02;letter-spacing:-0.03em;max-width:14ch}
+.about-grid h2 em{font-style:italic;color:var(--primary)}
+.about-grid .text p{font-size:16.5px;line-height:1.65;color:var(--ink);margin:0 0 16px;max-width:60ch}
+.about-grid .text p:first-child{font-size:18.5px;color:var(--ink);font-weight:500}
+.about-grid .text p b{font-weight:600;color:var(--primary)}
 </style>
 </head>
 <body>
@@ -64,99 +83,100 @@ h2.sec-title em{color:var(--bordeaux);font-style:italic}
 <nav class="portal-nav">
   <div class="portal-nav-inner">
     <a class="portal-brand" href="./">
-      <span class="spark"></span>
-      <span class="name"><b>Сила Тока</b><span>академия · персональный портал</span></span>
+      <span class="mark">а</span>
+      <span class="name"><b>Академия Силы Тока</b><span>персональный портал · v1.0</span></span>
     </a>
     <div class="portal-links">
       <a href="./" class="active">Главная</a>
-      <a href="./library/">Библиотека встреч</a>
+      <a href="./library/">Курсы</a>
       <a href="./setup/">Установка</a>
-      <a href="https://t.me/timzinin" target="_blank">Контакт</a>
     </div>
+    <a href="https://t.me/timzinin" target="_blank" class="portal-cta">Написать куратору</a>
   </div>
 </nav>
 
 <div class="wrap">
 
 <section class="hero">
-  <svg class="hero-geom" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <circle cx="100" cy="100" r="92" stroke="oklch(42% 0.15 25)" stroke-width="2.5"/>
-    <circle cx="100" cy="100" r="60" fill="none" stroke="oklch(72% 0.14 75)" stroke-width="2"/>
-    <path d="M30 100 L170 100 M100 30 L100 170" stroke="oklch(42% 0.15 25)" stroke-width="2"/>
-    <circle cx="100" cy="100" r="8" fill="oklch(42% 0.15 25)"/>
-  </svg>
-  <span class="eyebrow">для Рода и Дмитрия · v1.0</span>
-  <h1>Академия <em>Силы Тока</em></h1>
-  <p class="lede">Персональный образовательный портал. Здесь живут материалы наших занятий, инструкции по настройке инструментов и записи встреч. Возвращайтесь сюда между занятиями — чтобы повторить, посмотреть запись или скопировать команду.</p>
-  <div class="meta">
-    <div><b>Старт</b> 30 апреля 2026</div>
-    <div><b>Участники</b> Род Шайхутдинов · Дмитрий Харламов</div>
-    <div><b>Куратор</b> Тимофей Зинин</div>
-  </div>
-</section>
-
-<section>
-  <span class="eyebrow">разделы</span>
-  <h2 class="sec-title">С чего <em>начать</em></h2>
-  <p class="sec-lede">Три точки входа. Если впервые на портале — начните с «Установки». Если уже на занятии — открывайте «Библиотеку» с записями.</p>
-
-  <div class="module-grid">
-
-    <a class="module featured" href="./library/">
-      <div class="num">01</div>
-      <div class="tag">главное · обновляется</div>
-      <h3>Библиотека <em>встреч</em></h3>
-      <p class="desc">Записи всех занятий с тайм-кодами, конспектами и ссылками на материалы. Первая встреча уже внутри.</p>
-      <div class="arrow">Открыть</div>
-    </a>
-
-    <a class="module" href="./setup/">
-      <div class="num">02</div>
-      <div class="tag">базовая настройка</div>
-      <h3>Установка <em>Codex</em></h3>
-      <p class="desc">Пошаговая инструкция для Mac и Windows: Node, Codex CLI, голосовой ввод Handy, опционально Claude Code.</p>
-      <div class="arrow">Перейти</div>
-    </a>
-
-    <a class="module" href="https://t.me/timzinin" target="_blank">
-      <div class="num">03</div>
-      <div class="tag">прямой контакт</div>
-      <h3>Связь <em>с Тимофеем</em></h3>
-      <p class="desc">Любой вопрос — Telegram. Скриншот ошибки, идея, что добавить в портал — пишите без формальностей.</p>
-      <div class="arrow">@timzinin</div>
-    </a>
-
-  </div>
-</section>
-
-<section>
-  <div class="about">
+  <div class="hero-grid">
     <div>
-      <div class="label">для кого</div>
-      <h2 class="sec-title" style="font-size:clamp(28px,4vw,44px);margin-top:6px">Что мы здесь <em>делаем</em></h2>
-    </div>
-    <div>
-      <p>«Сила Тока» — подрядное проектное бюро. На занятиях мы шаг за шагом разбираемся, как устроены современные AI-агенты, скиллы и MCP, и как ими пользоваться руками — без посредников, в собственном терминале, на собственных задачах.</p>
-      <p>Цель — чтобы Род и Дмитрий <b>сами</b> могли формулировать задачу одной строкой и получать готовый артефакт: страницу, скрипт, обзор, отчёт. Без курсов «введение в нейросети» — сразу руками.</p>
-      <p>Все материалы остаются здесь. Ничего не теряется в чатах, ничего не нужно искать в почте. Один URL — вся история.</p>
-    </div>
-  </div>
-</section>
-
-<section>
-  <span class="eyebrow">всегда на связи</span>
-  <h2 class="sec-title">Если что-то <em>сломалось</em></h2>
-  <p class="sec-lede">Не сидите долго на непонятном экране. Скриншот в Telegram — самый быстрый способ разобраться.</p>
-
-  <div class="contact-block">
-    <div class="avatar">Т</div>
-    <div>
-      <h3>Тимофей Зинин</h3>
-      <div class="role">куратор · преподаватель · техподдержка</div>
-      <div class="channels">
-        <a href="https://t.me/timzinin" target="_blank">Telegram @timzinin</a>
-        <a href="https://timzinin.com" target="_blank">timzinin.com</a>
+      <span class="eyebrow">персональная программа · с 30 апреля 2026</span>
+      <h1>Академия<br><em>Силы Тока</em></h1>
+      <p class="lede">Учебный портал для <b>Рода Шайхутдинова</b> и <b>Дмитрия Харламова</b>. Здесь живут материалы наших занятий, инструкции по установке инструментов и записи встреч. Возвращайтесь между занятиями — повторить, пересмотреть запись, скопировать команду.</p>
+      <div class="actions">
+        <a href="./library/" class="btn-primary">Открыть курс</a>
+        <a href="./setup/" class="btn-ghost">Установка инструментов</a>
       </div>
+    </div>
+    <div class="hero-side">
+      <div class="row"><span class="l">Программа</span><span class="v">Foundations · AI-агенты в работе</span></div>
+      <div class="row"><span class="l">Старт</span><span class="v">30 апреля 2026</span></div>
+      <div class="row"><span class="l">Учеников</span><span class="v">2 — Род и Дмитрий</span></div>
+      <div class="row"><span class="l">Куратор</span><span class="v">Тимофей Зинин</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="course-section">
+  <div class="section-head">
+    <span class="eyebrow">текущая программа</span>
+    <h2>Foundations: <em>AI-агенты</em> в работе</h2>
+    <p class="desc">Шаг за шагом разбираемся, как устроены AI-агенты, скиллы и MCP — и как ими пользоваться руками, в собственном терминале, на собственных задачах. Без курсов «введение в нейросети» — сразу с практикой.</p>
+  </div>
+
+  <a class="course" href="./library/">
+    <div class="course-cover">
+      <span class="tag">● live · обновляется</span>
+      <div>
+        <div class="num">01</div>
+        <h3>Foundations<br><em>AI в работе</em></h3>
+      </div>
+    </div>
+    <div class="course-body">
+      <span class="lvl">базовый уровень · 1 урок · больше — впереди</span>
+      <p class="summary">Установка инструментов, основы Codex CLI, голосовой ввод, скиллы и MCP, end-to-end pipeline от запроса до публикации страницы.</p>
+      <div class="course-stats">
+        <div class="stat"><div class="l">Уроков</div><div class="v">1 / ∞</div></div>
+        <div class="stat"><div class="l">Длительность</div><div class="v">~1.5 ч / урок</div></div>
+      </div>
+      <span class="course-cta">Перейти к урокам</span>
+    </div>
+  </a>
+</section>
+
+<section class="secondary">
+  <div class="section-head">
+    <span class="eyebrow">сервис</span>
+    <h2>Сопровождение <em>и поддержка</em></h2>
+  </div>
+
+  <div class="secondary-grid">
+    <a class="tile" href="./setup/">
+      <div class="icon">⌘</div>
+      <h3>Установка <em>инструментов</em></h3>
+      <p>Пошаговая инструкция для Mac и Windows: Node, Codex CLI, голосовой ввод Handy. Ставится за 15–20 минут.</p>
+      <span class="arrow">К инструкции</span>
+    </a>
+
+    <a class="tile" href="https://t.me/timzinin" target="_blank">
+      <div class="icon">✸</div>
+      <h3>Связь <em>с куратором</em></h3>
+      <p>Любой вопрос — Telegram. Скриншот ошибки, идея, что добавить в портал — пишите без формальностей.</p>
+      <span class="arrow">@timzinin</span>
+    </a>
+  </div>
+</section>
+
+<section class="about">
+  <div class="about-grid">
+    <div>
+      <span class="eyebrow">про академию</span>
+      <h2 style="margin-top:14px">Зачем мы <em>здесь</em></h2>
+    </div>
+    <div class="text">
+      <p>«Сила Тока» — подрядное проектное бюро. Цель академии — чтобы Род и Дмитрий <b>сами</b> формулировали задачу одной строкой и получали готовый артефакт: страницу, скрипт, обзор, отчёт.</p>
+      <p>Все материалы остаются здесь. Ничего не теряется в чатах, ничего не нужно искать в почте. Один URL — вся история. Каждое новое занятие — новый урок в библиотеке.</p>
+      <p>Записи Zoom лежат прямо рядом с конспектом. Можно вернуться через две недели и быстро всё восстановить — без поиска по сообщениям.</p>
     </div>
   </div>
 </section>
@@ -165,8 +185,15 @@ h2.sec-title em{color:var(--bordeaux);font-style:italic}
 
 <footer class="portal-footer">
   <div class="inner">
-    <span>Сила Тока · Академия · с 30 апреля 2026</span>
-    <span><a href="https://t.me/timzinin" target="_blank">@timzinin</a></span>
+    <div>
+      <div class="brand">Академия Силы Тока</div>
+      <div class="meta">персональный портал · с 30 апреля 2026</div>
+    </div>
+    <div class="links">
+      <a href="./library/">Курс</a>
+      <a href="./setup/">Установка</a>
+      <a href="https://t.me/timzinin" target="_blank">Telegram @timzinin</a>
+    </div>
   </div>
 </footer>
 

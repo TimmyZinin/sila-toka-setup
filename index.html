@@ -113,6 +113,25 @@ pre code{background:transparent;color:inherit;padding:0;font-size:14px}
 footer{border-top:1.5px solid var(--line);padding:40px 0;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-soft);letter-spacing:0.06em;text-transform:uppercase}
 footer a{color:var(--ink-soft)}
 
+.handy-card{background:oklch(96.5% 0.045 95);border:2.5px solid var(--line);padding:30px clamp(22px,4vw,40px);margin:24px 0 32px;display:grid;grid-template-columns:auto 1fr;gap:30px;align-items:center;box-shadow:8px 8px 0 var(--line);position:relative}
+.handy-card::before{content:"";position:absolute;top:-2.5px;right:-2.5px;width:80px;height:6px;background:var(--bordeaux)}
+.handy-card .visual{max-width:300px;width:100%}
+.handy-card .visual img{display:block;width:100%;height:auto}
+.handy-card .body .tag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;color:var(--bordeaux);text-transform:uppercase;font-weight:600;margin-bottom:12px;display:flex;flex-wrap:wrap;gap:6px 14px}
+.handy-card .body .tag span{display:inline-flex;align-items:center;gap:6px}
+.handy-card .body .tag span::before{content:"●";color:var(--ochre);font-size:10px}
+.handy-card .body .pitch{font-family:'DM Serif Display',serif;font-size:clamp(22px,2.6vw,32px);color:var(--ink);margin:0 0 10px;letter-spacing:-0.015em;line-height:1.1;max-width:24ch}
+.handy-card .body .pitch em{font-style:italic;color:var(--bordeaux)}
+.handy-card .body .copy{font-size:15.5px;color:var(--ink-soft);line-height:1.5;max-width:54ch;margin:0}
+.handy-card.compact{padding:22px 26px;margin:18px 0}
+.handy-card.compact .visual{max-width:200px}
+.handy-card.compact .body .pitch{font-size:clamp(20px,2vw,24px);margin-bottom:6px}
+.handy-card.compact .body .copy{font-size:14.5px}
+@media(max-width:760px){
+  .handy-card{grid-template-columns:1fr;gap:18px;padding:22px;box-shadow:5px 5px 0 var(--line)}
+  .handy-card .visual{max-width:220px;margin:0 auto}
+}
+
 @media(max-width:680px){
   .tab-btn{padding:14px 14px;font-size:12px}
   .tab-btn .num{font-size:18px}
@@ -175,7 +194,14 @@ footer a{color:var(--ink-soft)}
 <section>
   <h2>Логика на завтра</h2>
   <p><b>Главное — Codex CLI.</b> Подписка ChatGPT Business, которая у вас уже оплачена, открывает Codex CLI без дополнительных ключей и API-кредитов. Логин в одно нажатие через браузер.</p>
-  <p><b>Удобство — Handy.</b> Бесплатная open-source утилита для голосового ввода. Зажал клавишу — продиктовал — отпустил, текст вставляется в то поле, где курсор (в том числе в Codex). Распознаёт локально, аудио не уходит в облако — это уместно с учётом ваших NDA. Ставится за пару минут на Mac и Windows.</p>
+  <aside class="handy-card compact">
+    <a class="visual" href="https://handy.computer" target="_blank"><img src="img/handy-logo.png" alt="Handy — speech to text" loading="lazy"></a>
+    <div class="body">
+      <div class="tag"><span>бесплатно</span><span>open source</span><span>локально</span></div>
+      <p class="pitch">Удобство — <em>Handy</em></p>
+      <p class="copy">Зажал клавишу — продиктовал — отпустил, текст вставляется в то поле, где курсор. В том числе в Codex. Распознаёт локально, аудио не уходит в облако — уместно с вашими NDA. Ставится за пару минут на Mac и Windows.</p>
+    </div>
+  </aside>
   <p><b>Claude Code — опционально.</b> Регистрация в Claude.ai через российский номер не идёт. Один из путей — eSIM Казахстана/Сербии. Это второстепенная задача: если у Рода до утра получится завести Anthropic — поставим Claude Code сверху. Если нет — занятие пройдёт целиком на Codex.</p>
   <div class="callout callout-ok">
     <b>Минимум к утру:</b> у Рода и у Дмитрия в терминале запускается команда <code>codex</code> и открывает интерфейс. Всё остальное — бонус.
@@ -296,8 +322,15 @@ npm -v</code></pre>
 
 <section>
   <h3><span class="step">Шаг 6</span>Handy — голосовой ввод в терминал</h3>
-  <p>Маленькая бесплатная утилита, которая превращает Mac в надиктовщика: зажал горячую клавишу — говоришь — отпустил, текст автоматически вставляется в то поле, где курсор. В том числе в окно Codex.</p>
-  <p>Зачем для нашей задачи: разбор лота тендера, постановка задачи Codex, формулировка вопроса по ПУЭ — всё это намного быстрее наговорить голосом, чем набирать. Распознавание происходит локально на вашем маке, ничего не уходит в облако, что важно с учётом ваших NDA.</p>
+  <aside class="handy-card">
+    <a class="visual" href="https://handy.computer" target="_blank"><img src="img/handy-logo.png" alt="Handy — speech to text" loading="lazy"></a>
+    <div class="body">
+      <div class="tag"><span>бесплатно</span><span>open source</span><span>локально</span></div>
+      <p class="pitch">Speak into <em>any text field</em></p>
+      <p class="copy">Маленькая утилита, которая превращает Mac в надиктовщика: зажал клавишу → говоришь → отпустил, текст вставляется в курсор. В том числе в окно Codex.</p>
+    </div>
+  </aside>
+  <p>Зачем для нашей задачи: разбор лота тендера, постановка задачи Codex, формулировка вопроса по ПУЭ — намного быстрее наговорить голосом. Распознавание происходит локально на маке, ничего не уходит в облако — это важно с учётом ваших NDA.</p>
   <p>Скачать .dmg под ваш мак с <a href="https://handy.computer/download" target="_blank">handy.computer/download</a>:</p>
   <ul>
     <li><b>Apple Silicon</b> (M1/M2/M3/M4 — почти все маки с 2020 года) → <a href="https://github.com/cjpais/Handy/releases/download/v0.8.3/Handy_0.8.3_aarch64.dmg" target="_blank">Handy_0.8.3_aarch64.dmg</a></li>
@@ -402,8 +435,15 @@ npm -v</code></pre>
 
 <section>
   <h3><span class="step">Шаг 6</span>Handy — голосовой ввод в терминал</h3>
-  <p>Маленькая бесплатная утилита, которая превращает Windows в надиктовщика: зажал горячую клавишу — говоришь — отпустил, текст автоматически вставляется в то поле, где курсор. В том числе в окно Codex (PowerShell).</p>
-  <p>Зачем для нашей задачи: разбор лота тендера, постановка задачи Codex, формулировка отклика по HH — намного быстрее наговорить голосом, чем набирать. Распознавание происходит локально на вашем компьютере, ничего не уходит в облако, что важно с учётом NDA с заказчиками.</p>
+  <aside class="handy-card">
+    <a class="visual" href="https://handy.computer" target="_blank"><img src="img/handy-logo.png" alt="Handy — speech to text" loading="lazy"></a>
+    <div class="body">
+      <div class="tag"><span>бесплатно</span><span>open source</span><span>локально</span></div>
+      <p class="pitch">Speak into <em>any text field</em></p>
+      <p class="copy">Маленькая утилита, которая превращает Windows в надиктовщика: зажал клавишу → говоришь → отпустил, текст вставляется в курсор. В том числе в PowerShell с Codex.</p>
+    </div>
+  </aside>
+  <p>Зачем для нашей задачи: разбор лота тендера, постановка задачи Codex, формулировка отклика по HH — намного быстрее наговорить голосом. Распознавание происходит локально на компьютере, ничего не уходит в облако — это важно с учётом NDA с заказчиками.</p>
   <p>Скачать установщик с <a href="https://handy.computer/download" target="_blank">handy.computer/download</a>:</p>
   <ul>
     <li><b>Обычный ПК или ноутбук с Intel/AMD</b> (99% случаев) → <a href="https://github.com/cjpais/Handy/releases/download/v0.8.3/Handy_0.8.3_x64-setup.exe" target="_blank">Handy_0.8.3_x64-setup.exe</a></li>

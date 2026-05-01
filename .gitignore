@@ -1,0 +1,3 @@
+.playwright-cli/
+*.pre_resize
+.DS_Store
